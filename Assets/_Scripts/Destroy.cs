@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
-	private void OnCollisionEnter2D(Collision2D collision)
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.name.Equals("Bullet"))
+		if (collision.gameObject.CompareTag("Bullet"))
 		{
 			Destroy(collision.gameObject);
+			Destroy(this.gameObject);
+		}
+
+		if (collision.gameObject.CompareTag("BigBullet"))
+		{
 			Destroy(this.gameObject);
 		}
 	}

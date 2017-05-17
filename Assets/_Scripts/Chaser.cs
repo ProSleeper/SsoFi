@@ -25,10 +25,10 @@ public class Chaser : MonoBehaviour
 
 		float angle = Vector3.Dot(playerDir, Vector3.up);
 
-		Vector3 cross =  Vector3.Cross(Vector3.up, playerDir);
+		Vector3 cross = Vector3.Cross(Vector3.up, playerDir);
 		float dosu = Mathf.Acos(angle);
 
-		
+
 		dosu = Mathf.Rad2Deg * dosu;
 
 		//Debug.Log(cross);
@@ -37,10 +37,12 @@ public class Chaser : MonoBehaviour
 		if (Vec3Lenth(cross))
 		{
 			transform.localRotation = Quaternion.AngleAxis(Mathf.PI - dosu, Vector3.back);
+			//Quaternion.Lerp(transform.localRotation, Quaternion.AngleAxis(Mathf.PI - dosu, Vector3.back), 1);
 		}
 		else
 		{
 			transform.localRotation = Quaternion.AngleAxis(-dosu, Vector3.forward);
+			//Quaternion.Lerp(transform.localRotation, Quaternion.AngleAxis(-dosu, Vector3.forward), 1);
 		}
 	}
 
