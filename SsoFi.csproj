@@ -78,7 +78,9 @@
     <Compile Include="Assets\_Scripts\BulletMove.cs" />
     <Compile Include="Assets\_Scripts\Chaser.cs" />
     <Compile Include="Assets\_Scripts\Crash.cs" />
+    <Compile Include="Assets\_Scripts\Destroy.cs" />
     <Compile Include="Assets\_Scripts\EnemyManager.cs" />
+    <Compile Include="Assets\_Scripts\Fire.cs" />
     <Compile Include="Assets\_Scripts\PlayerMove.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

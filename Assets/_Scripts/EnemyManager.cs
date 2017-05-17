@@ -35,9 +35,9 @@ public class EnemyManager : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log(Input.mousePosition.x);
-            Debug.Log(Input.mousePosition.y);
-            Debug.Log(Input.mousePosition.z);
+            //Debug.Log(Input.mousePosition.x);
+            //Debug.Log(Input.mousePosition.y);
+            //Debug.Log(Input.mousePosition.z);
         }
     }
 
@@ -50,6 +50,7 @@ public class EnemyManager : MonoBehaviour
         GameObject spawnEnemy = Instantiate(Enemy, spawnPos, Quaternion.identity) as GameObject;
         spawnEnemy.transform.position = new Vector3(spawnEnemy.transform.position.x, spawnEnemy.transform.position.y, 0);
         spawnEnemy.transform.parent = this.transform;
+		spawnEnemy.name = "Enemy";
     }
 
     IEnumerator EnemySpawn()

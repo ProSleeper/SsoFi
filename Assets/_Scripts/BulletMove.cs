@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BulletMove : MonoBehaviour
 {
-	public float BulletSpeed = 3;
-	public Vector3 BulletDir = new Vector3(0, 1, 0);
+	public float BulletSpeed;
+	public Vector3 BulletDir;
 
     // Use this for initialization
     void Start()
@@ -16,6 +16,6 @@ public class BulletMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Translate(BulletDir * BulletSpeed * Time.deltaTime);
-    }
+        this.transform.Translate(BulletDir * BulletSpeed * Time.deltaTime);	
+	}
 }

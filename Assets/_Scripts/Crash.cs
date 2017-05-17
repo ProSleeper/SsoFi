@@ -15,14 +15,15 @@ public class Crash : MonoBehaviour
 		btn.gameObject.SetActive(false);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("플레이어 충돌!");
-		btn.gameObject.SetActive(true);
-
-		//Destroy(this.gameObject);
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.name.Equals("Enemy"))
+		{
+			Debug.Log("플레이어 충돌!");
+			btn.gameObject.SetActive(true);
+		}
 	}
-
+	
     // Update is called once per frame
     void Restart()
     {

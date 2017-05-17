@@ -54,12 +54,5 @@ public class PlayerMove : MonoBehaviour
 			}
 
 		}
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-			GameObject bullet = Resources.Load("Prefabs/Bullet") as GameObject;
-			GameObject spawnEnemy = Instantiate(bullet, new Vector3(0,0,0), Quaternion.identity) as GameObject;
-			
-		}
 	}
-
 }
