@@ -8,16 +8,16 @@ public class PlayerMove : MonoBehaviour
     Vector3 mouseClickPos;
     Vector3 distance;
 
-    // Use this for initialization
-    void Start()
-    {
+	// Use this for initialization
+	void Start()
+	{
 
-    }
+	}
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0))
         {
             mouseClickPos = Input.mousePosition;
             mouseClickPos = Camera.main.ScreenToWorldPoint(mouseClickPos);

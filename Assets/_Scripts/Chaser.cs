@@ -44,6 +44,8 @@ public class Chaser : MonoBehaviour
 			transform.localRotation = Quaternion.AngleAxis(-dosu, Vector3.forward);
 			//Quaternion.Lerp(transform.localRotation, Quaternion.AngleAxis(-dosu, Vector3.forward), 1);
 		}
+
+		chaseSpeed += Time.deltaTime * 0.1f; 
 	}
 
 	bool Vec3Lenth(Vector3 v)

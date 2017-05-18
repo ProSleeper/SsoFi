@@ -16,6 +16,12 @@ public class Destroy : MonoBehaviour
 		{
 			Destroy(this.gameObject);
 		}
+
+		if (collision.gameObject.CompareTag("RoundBullet"))
+		{
+			
+			//this.gameObject.GetComponent<>
+		}
 	}
 
 }
