@@ -3,9 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public enum MISSILE_TYPE
+{
+	MT_DEFAULT,
+	MT_BIG,
+	MT_ROUND,
+	MT_EIGHTDIR,
+	MT_ONEROUNT,
+	MT_MAX
+}
+
+
 public class Fire : MonoBehaviour
 {
-
+	
 	Vector3 BulletDir = Vector3.up;
 	float BulletFireSpeed;
 	float MaxBulletFireSpeed = 0.2f;
@@ -18,25 +30,31 @@ public class Fire : MonoBehaviour
 	GameObject RoundBullet;
 	GameObject roundBullet;
 	delegate void FireBulletFunc();
-	FireBulletFunc FireBullet;
-	public Button[] btn;
+	FireBulletFunc CurFireBullet;
+	event FireBulletFunc Active;
+
+	FireBulletFunc[] ArrFire = new FireBulletFunc[(int)MISSILE_TYPE.MT_MAX];
+	
 	// Use this for initialization
 	void Start()
 	{
-		FireBullet = new FireBulletFunc(DefaultMissile);
+		//CurFireBullet = new FireBulletFunc(DefaultMissile);
 		Bullet = Resources.Load("Prefabs/Bullet") as GameObject;
 		BigBullet = Resources.Load("Prefabs/BigBullet") as GameObject;
 		RoundBullet = Resources.Load("Prefabs/RoundBullet") as GameObject;
 
 		roundBullet = Instantiate(RoundBullet, this.transform.position, Quaternion.identity) as GameObject;
 		roundBullet.SetActive(false);
-		btn[0].onClick.AddListener(Missile1);
-		btn[1].onClick.AddListener(Missile2);
-		btn[2].onClick.AddListener(Missile3);
-		btn[3].onClick.AddListener(Missile4);
-		btn[4].onClick.AddListener(Missile5);
+		
+		ArrFire[0] = Missile1;
+		ArrFire[1] = Missile2;
+		ArrFire[2] = Missile3;
+		ArrFire[3] = Missile4;
+		ArrFire[4] = Missile5;
 
-		CurrentBullet = Bullet;
+		Active = ArrFire[0];
+		Active();
+
 	}
 
 	// Update is called once per frame
@@ -51,7 +69,13 @@ public class Fire : MonoBehaviour
 				BulletDir = Vector3.up;
 			}
 		}
-		FireBullet();
+		CurFireBullet();
+	}
+
+	public void ChangeMissile(int mt)
+	{
+		Active = ArrFire[mt];
+		Active();
 	}
 
 	public void Missile1()
@@ -59,7 +83,7 @@ public class Fire : MonoBehaviour
 		roundBullet.SetActive(false);
 		MaxBulletFireSpeed = 0.2f;
 		CurrentBullet = Bullet;
-		FireBullet = new FireBulletFunc(DefaultMissile);
+		CurFireBullet = new FireBulletFunc(DefaultMissile);
 	}
 
 	public void Missile2()
@@ -68,25 +92,26 @@ public class Fire : MonoBehaviour
 		MaxBulletFireSpeed = 0.8f;
 		CurrentBullet = BigBullet;
 		//FireBullet = new FireBulletFunc(BigMissile);
-		FireBullet = new FireBulletFunc(DefaultMissile);
+		CurFireBullet = new FireBulletFunc(DefaultMissile);
 	}
 
 	void Missile3()
 	{
 		roundBullet.SetActive(false);
-		FireBullet = new FireBulletFunc(RotationMissile);
+		CurFireBullet = new FireBulletFunc(RotationMissile);
+		
 	}
 
 	void Missile4()
 	{
 		roundBullet.SetActive(true);
-		FireBullet = new FireBulletFunc(RoundMissile);
+		CurFireBullet = new FireBulletFunc(RoundMissile);
 	}
 
 	void Missile5()
 	{
 		roundBullet.SetActive(false);
-		FireBullet = new FireBulletFunc(RotationOneMissile);
+		CurFireBullet = new FireBulletFunc(RotationOneMissile);
 	}
 
 	bool Vec3Lenth(Vector3 v)

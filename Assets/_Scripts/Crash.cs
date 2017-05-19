@@ -22,6 +22,12 @@ public class Crash : MonoBehaviour
 			Debug.Log("플레이어 충돌!");
 			btn.gameObject.SetActive(true);
 		}
+
+		if (collision.gameObject.tag.Equals("Item"))
+		{
+			Destroy(collision.gameObject);
+			this.gameObject.GetComponent<Fire>().ChangeMissile(Random.Range(0, 5));
+		}
 	}
 	
     // Update is called once per frame
