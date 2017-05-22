@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destroy : MonoBehaviour {
+public class DestroyBullet : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		Destroy(collision.gameObject);
+		if (collision.gameObject.transform.parent == null)
+		{
+			Destroy(collision.gameObject);
+		}
+		else
+		{
+			Destroy(collision.gameObject.transform.parent.gameObject);
+		}
+		
 	}
 }

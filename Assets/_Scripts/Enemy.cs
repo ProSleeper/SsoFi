@@ -47,29 +47,23 @@ public class Enemy : MonoBehaviour {
 		chaseSpeed += Time.deltaTime * 0.1f;
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	//이렇게 처리하거나 다른 스크립트에서 충돌처리하면 거기서 함수 만들어서 불러주기
+	//private void OnTriggerEnter2D(Collider2D collision)
+	//{
+	//	if (collision.gameObject.tag.Equals("Bullet"))
+	//	{
+	//		if (Random.Range(0, 100.0f) < 5.0f)
+	//		{
+	//			Instantiate(Item, this.transform.position, Quaternion.identity);
+	//		}
+	//	}
+	//}
+
+	public void SpawnItem()
 	{
-		if (collision.gameObject.CompareTag("Bullet"))
+		if (Random.Range(0, 100.0f) < 5.0f)
 		{
-			Destroy(collision.gameObject);
-			Destroy(this.gameObject);
-
-			if (Random.Range(0, 100.0f) < 5.0f)
-			{
-				Instantiate(Item, this.transform.position, Quaternion.identity);
-			}
-
-		}
-
-		if (collision.gameObject.CompareTag("BigBullet"))
-		{
-			Destroy(this.gameObject);
-		}
-
-		if (collision.gameObject.CompareTag("RoundBullet"))
-		{
-
-			//this.gameObject.GetComponent<>
+			Instantiate(Item, this.transform.position, Quaternion.identity);
 		}
 	}
 

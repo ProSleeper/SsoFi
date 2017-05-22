@@ -11,6 +11,7 @@ public enum MISSILE_TYPE
 	MT_EIGHTDIR,
 	MT_ROUND,
 	MT_ONEROUND,
+	MT_CHASE,
 	MT_MAX
 }
 
@@ -35,6 +36,9 @@ public class Player : MonoBehaviour
 	GameObject BigBullet;
 	GameObject RoundBullet;
 	GameObject roundBullet;
+	GameObject ChaseBullet;
+	GameObject RoundOneBullet;
+
 	delegate void FireBulletFunc();
 	FireBulletFunc CurFireBullet;
 	event FireBulletFunc Active;
@@ -51,6 +55,9 @@ public class Player : MonoBehaviour
 		Bullet = Resources.Load("Prefabs/Bullet/Bullet") as GameObject;
 		BigBullet = Resources.Load("Prefabs/Bullet/BigBullet") as GameObject;
 		RoundBullet = Resources.Load("Prefabs/Bullet/RoundBullet") as GameObject;
+		ChaseBullet = Resources.Load("Prefabs/Bullet/ChaseBullet") as GameObject;
+		RoundOneBullet = Resources.Load("Prefabs/Bullet/OneRoundBullet") as GameObject;
+
 
 		roundBullet = Instantiate(RoundBullet, this.transform.position, Quaternion.identity) as GameObject;
 		roundBullet.SetActive(false);
@@ -60,6 +67,7 @@ public class Player : MonoBehaviour
 		ArrFire[(int)MISSILE_TYPE.MT_EIGHTDIR] = Missile3;
 		ArrFire[(int)MISSILE_TYPE.MT_ROUND] = Missile4;
 		ArrFire[(int)MISSILE_TYPE.MT_ONEROUND] = Missile5;
+		ArrFire[(int)MISSILE_TYPE.MT_CHASE] = Missile6;
 
 		Active = ArrFire[4];
 		Active();
@@ -146,8 +154,8 @@ public class Player : MonoBehaviour
 	
 	public void ChangeMissile(int mt)
 	{
-		Active = ArrFire[mt];
-		Active();
+		//Active = ArrFire[mt];
+		//Active();
 	}
 
 	public void Missile1()
@@ -179,7 +187,13 @@ public class Player : MonoBehaviour
 	void Missile5()
 	{
 		roundBullet.SetActive(false);
-		CurFireBullet = new FireBulletFunc(RotationOneMissile);
+		CurFireBullet = new FireBulletFunc(OneRotationMissile);
+	}
+
+	void Missile6()
+	{
+		roundBullet.SetActive(false);
+		CurFireBullet = new FireBulletFunc(ChaserMissile);
 	}
 
 	bool Vec3Lenth(Vector3 v)
@@ -189,59 +203,26 @@ public class Player : MonoBehaviour
 
 	void DefaultMissile()
 	{
-		MaxBulletFireSpeed = 0.2f;
 		BulletFireSpeed += Time.deltaTime;
-		if (BulletFireSpeed > MaxBulletFireSpeed)
+		if (BulletFireSpeed > 0.2f)
 		{
-			GameObject spawnEnemy = null;
-			Vector3 bulletdir = Vector3.zero;
-			Vector3 cross = Vector3.zero;
-			float angle = 0;
-
-			bulletdir = Vector3.zero - this.transform.position;
-			spawnEnemy = Instantiate(CurrentBullet, this.transform.position, Quaternion.identity) as GameObject;
-			spawnEnemy.GetComponent<Bullet>().BulletDir = bulletdir.normalized;
-
-			cross = Vector3.Cross(Vector3.right, bulletdir.normalized);
-			angle = Vector3.Dot(bulletdir.normalized, Vector3.right);
-			angle = Mathf.Acos(angle);
-			angle = Mathf.Rad2Deg * angle;
-			
-
-			//외적을 구해서 외적의 순서가 
-			spawnEnemy.transform.localRotation = Quaternion.AngleAxis(angle, cross.normalized);
+			Instantiate(Bullet, this.gameObject.transform.position, Quaternion.identity);
 			BulletFireSpeed = 0;
 		}
 	}
 
 	void BigMissile()
 	{
-		MaxBulletFireSpeed = 0.8f;
 		BulletFireSpeed += Time.deltaTime;
-		if (BulletFireSpeed > MaxBulletFireSpeed)
+		if (BulletFireSpeed > 1.5f)
 		{
-
-			GameObject spawnEnemy = null;
-			Vector3 bulletdir = Vector3.zero;
-			Vector3 cross = Vector3.zero;
-			float angle = 0;
-
-			bulletdir = Vector3.zero - this.transform.position;
-			spawnEnemy = Instantiate(CurrentBullet, this.transform.position, Quaternion.identity) as GameObject;
-			spawnEnemy.GetComponent<Bullet>().BulletDir = bulletdir.normalized;
-
-			cross = Vector3.Cross(Vector3.right, bulletdir.normalized);
-			angle = Vector3.Dot(bulletdir.normalized, Vector3.right);
-			angle = Mathf.Acos(angle);
-			angle = Mathf.Rad2Deg * angle;
-
-
-			//외적을 구해서 외적의 순서가 
-			spawnEnemy.transform.localRotation = Quaternion.AngleAxis(angle, cross.normalized);
+			Instantiate(BigBullet, this.gameObject.transform.position, Quaternion.identity);
 			BulletFireSpeed = 0;
 		}
 	}
 
+
+	//여기만 하면 됨 하나씩 16방향으로 나가는 미사일
 	void RotationMissile()
 	{
 		BulletFireSpeed += Time.deltaTime;
@@ -256,7 +237,7 @@ public class Player : MonoBehaviour
 				spawnEnemy[i] = Instantiate(Bullet, bulletPos, Quaternion.identity) as GameObject;
 				v3RotatedDirection = Quaternion.Euler(0f, 0f, 45f * i) * Vector3.up;
 				spawnEnemy[i].transform.localRotation = Quaternion.AngleAxis(90 + 45 * i, Vector3.forward);
-				spawnEnemy[i].GetComponent<Bullet>().BulletDir = v3RotatedDirection;
+				//spawnEnemy[i].GetComponent<Bullet>().BulletDir = v3RotatedDirection;
 			}
 			BulletFireSpeed = 0;
 		}
@@ -265,26 +246,19 @@ public class Player : MonoBehaviour
 	void RoundMissile()
 	{
 		roundBullet.transform.position = this.transform.position;
-		roundBullet.transform.rotation = Quaternion.Euler(0, 0, (RotateTime++) * 1.5f);
 	}
 	
-	void RotationOneMissile()
+	void OneRotationMissile()
 	{
 		BulletFireSpeed += Time.deltaTime;
-		if (BulletFireSpeed > 0.1f)
+		if (BulletFireSpeed > 1.0f)
 		{
-			Vector3 bulletPos = Vector3.zero;
-			Vector3 v3RotatedDirection = Vector3.zero;
-			GameObject spawnEnemy = null;
-			
-			bulletPos = this.transform.position;
-
-			spawnEnemy = Instantiate(Bullet, bulletPos, Quaternion.identity) as GameObject;
-
-			v3RotatedDirection = Quaternion.Euler(0f, 0f, 22.5f * DirCount) * Vector3.up;
-			spawnEnemy.transform.localRotation = Quaternion.AngleAxis(90 + 22.5f * DirCount++, Vector3.forward);
-			spawnEnemy.GetComponent<Bullet>().BulletDir = v3RotatedDirection;//Vector3.up; 
-
+			for (int i = 0; i < 8; i++)
+			{
+				GameObject spawn_bullet = Instantiate(RoundOneBullet, this.gameObject.transform.position, Quaternion.identity) as GameObject;
+				spawn_bullet.transform.GetComponentInChildren<OneRoundBullet>().BulletDir = Quaternion.Euler(0, 0, 45.0f * i) * Vector3.up;
+				//Debug.Log(spawn_bullet.transform.GetComponentInChildren<OneRoundBullet>().BulletDir);
+			}
 			BulletFireSpeed = 0;
 		}
 	}
@@ -292,22 +266,10 @@ public class Player : MonoBehaviour
 	//미구현
 	void ChaserMissile()
 	{
-
 		BulletFireSpeed += Time.deltaTime;
-		if (BulletFireSpeed > 0.1f)
+		if (BulletFireSpeed > 0.3f)
 		{
-			Vector3 bulletPos = this.transform.position;
-			bulletPos.z = 1;
-
-			GameObject spawnEnemy = Instantiate(Bullet, bulletPos, Quaternion.identity) as GameObject;
-
-			float Radius = 22.5f;
-			Quaternion v3Rotation = Quaternion.Euler(0f, 0f, Radius += 22.5f);  // 회전각 
-			Vector3 v3Direction = Vector3.up; // 회전시킬 벡터(테스트용으로 world forward 썼음) 
-			Vector3 v3RotatedDirection = v3Rotation * v3Direction;
-			spawnEnemy.transform.right = v3RotatedDirection;
-			spawnEnemy.GetComponent<Bullet>().BulletDir = Vector3.right;//Vector3.up; 
-
+			Instantiate(ChaseBullet, this.gameObject.transform.position, Quaternion.identity);
 			BulletFireSpeed = 0;
 		}
 	}
