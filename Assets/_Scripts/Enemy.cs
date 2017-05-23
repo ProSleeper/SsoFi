@@ -30,11 +30,12 @@ public class Enemy : MonoBehaviour {
 		playerDir = (player.transform.position - this.transform.position).normalized;
 		this.transform.position += playerDir * chaseSpeed * Time.deltaTime;
 
-
+		float angle = 0;
+		Vector3 cross = Vector3.zero;
 		//플레이어 방향으로 머리 회전
 		//현재 머리의 방향은 up벡터
-		float angle = Vector3.Dot(playerDir, Vector3.up);
-		Vector3 cross = Vector3.Cross(Vector3.up, playerDir);
+		angle = Vector3.Dot(playerDir, Vector3.up);
+		cross = Vector3.Cross(Vector3.up, playerDir);
 		angle = Mathf.Acos(angle);
 
 
@@ -47,21 +48,9 @@ public class Enemy : MonoBehaviour {
 		chaseSpeed += Time.deltaTime * 0.1f;
 	}
 
-	//이렇게 처리하거나 다른 스크립트에서 충돌처리하면 거기서 함수 만들어서 불러주기
-	//private void OnTriggerEnter2D(Collider2D collision)
-	//{
-	//	if (collision.gameObject.tag.Equals("Bullet"))
-	//	{
-	//		if (Random.Range(0, 100.0f) < 5.0f)
-	//		{
-	//			Instantiate(Item, this.transform.position, Quaternion.identity);
-	//		}
-	//	}
-	//}
-
 	public void SpawnItem()
 	{
-		if (Random.Range(0, 100.0f) < 5.0f)
+		if (Random.Range(0, 100.0f) < 1.0f)
 		{
 			Instantiate(Item, this.transform.position, Quaternion.identity);
 		}

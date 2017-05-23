@@ -11,11 +11,11 @@ public class DefaultBullet : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		//BulletDir = Vector3.zero - this.transform.position;
-		//if (Vector3.Distance(Vector3.zero, this.transform.position) < 1.0f)
-		//{
-		//	BulletDir = Vector3.up;
-		//}
+		BulletDir = Vector3.zero - this.transform.position;
+		if (Vector3.Distance(Vector3.zero, this.transform.position) < 1.0f)
+		{
+			BulletDir = Vector3.up;
+		}
 	}
 
     // Update is called once per frame

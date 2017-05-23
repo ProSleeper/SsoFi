@@ -11,5 +11,9 @@ public class OneRoundBullet : DefaultBullet
 	//	BulletDir.Normalize();
 	//	this.transform.position += BulletDir * BulletSpeed * Time.deltaTime;
 	//}
-	
+	private void Start()
+	{
+
+	}
+
 }
