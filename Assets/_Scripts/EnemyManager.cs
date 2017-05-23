@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
         get
         {
             if (_instance == null)
-                Debug.LogError("cSingleton == null");
+                Debug.LogError("EnemyManager == null");
             return _instance;
         }
     }

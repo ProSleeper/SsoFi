@@ -44,7 +44,6 @@ public class DefaultBullet : MonoBehaviour
 	{
 		if (collision.gameObject.tag.Equals("Enemy"))
 		{
-			collision.gameObject.GetComponent<Enemy>().SpawnItem();
 			Destroy(collision.gameObject);
 			Destroy(this.transform.parent.gameObject);
 		}

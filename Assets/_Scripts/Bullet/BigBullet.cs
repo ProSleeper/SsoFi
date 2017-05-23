@@ -8,7 +8,6 @@ public class BigBullet : DefaultBullet
 	{
 		if (collision.gameObject.tag.Equals("Enemy"))
 		{
-			collision.gameObject.GetComponent<Enemy>().SpawnItem();
 			Destroy(collision.gameObject);
 		}
 	}
