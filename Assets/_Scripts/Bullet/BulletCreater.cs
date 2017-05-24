@@ -10,10 +10,11 @@ public class BulletCreater : MonoBehaviour {
 
 	GameObject Bullet;
 	GameObject BigBullet;
-	GameObject RoundBullet;
+	GameObject OrbitBullet;
 	GameObject ChaseBullet;
 	GameObject RoundOneBullet;
-	GameObject Round;
+
+	GameObject Orbit;
 
 	delegate void FireBulletFunc();
 	FireBulletFunc CurFireBullet;
@@ -22,11 +23,11 @@ public class BulletCreater : MonoBehaviour {
 	{
 		Bullet = Resources.Load("Prefabs/Bullet/Bullet") as GameObject;
 		BigBullet = Resources.Load("Prefabs/Bullet/BigBullet") as GameObject;
-		RoundBullet = Resources.Load("Prefabs/Bullet/RoundBullet") as GameObject;
+		OrbitBullet = Resources.Load("Prefabs/Bullet/OrbitBullet") as GameObject;
 		ChaseBullet = Resources.Load("Prefabs/Bullet/ChaseBullet") as GameObject;
 		RoundOneBullet = Resources.Load("Prefabs/Bullet/OneRoundBullet") as GameObject;
-		Round = Instantiate(RoundBullet);
-		Round.SetActive(false);
+		Orbit = Instantiate(OrbitBullet);
+		Orbit.SetActive(false);
 		MaxFireSpeed = 0.2f;
 		CurFireBullet = DefaultMissile;
 	}
@@ -41,38 +42,34 @@ public class BulletCreater : MonoBehaviour {
 		}
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	public void BulletChange(BULLET_TYPE bullet)
 	{
-		if (collision.gameObject.tag.Equals("Item"))
-		{
-			Destroy(collision.gameObject);
-			CurFireBullet = FireChange((MISSILE_TYPE)Random.Range(0, 6));
-		}
+		CurFireBullet = FireChange(bullet);
 	}
 
-	FireBulletFunc FireChange(MISSILE_TYPE mt)
+	FireBulletFunc FireChange(BULLET_TYPE bullet)
 	{
-		Round.SetActive(false);
+		Orbit.SetActive(false);
 
-		switch (mt)
+		switch (bullet)
 		{
-			case MISSILE_TYPE.MT_DEFAULT:
+			case BULLET_TYPE.BT_DEFAULT:
 				MaxFireSpeed = 0.2f;
 				return DefaultMissile;
-			case MISSILE_TYPE.MT_BIG:
+			case BULLET_TYPE.BT_BIG:
 				MaxFireSpeed = 1.5f;
 				return BigMissile;
-			case MISSILE_TYPE.MT_EIGHTDIR:
+			case BULLET_TYPE.BT_EIGHTDIR:
 				MaxFireSpeed = 1.0f;
-				return RotationMissile;
-			case MISSILE_TYPE.MT_ROUND:
+				return EightDirMissile;
+			case BULLET_TYPE.BT_ORBIT:
 				MaxFireSpeed = 0f;
-				Round.SetActive(true);
-				return RoundMissile;
-			case MISSILE_TYPE.MT_ONEROUND:
+				Orbit.SetActive(true);
+				return OrbitMissile;
+			case BULLET_TYPE.BT_ONEROUND:
 				MaxFireSpeed = 0.1f;
 				return OneRotationMissile;
-			case MISSILE_TYPE.MT_CHASE:
+			case BULLET_TYPE.BT_CHASE:
 				MaxFireSpeed = 0.15f;
 				return ChaserMissile;
 			default:
@@ -90,7 +87,7 @@ public class BulletCreater : MonoBehaviour {
 		Instantiate(BigBullet, this.gameObject.transform.position, Quaternion.identity);
 	}
 
-	void RotationMissile()
+	void EightDirMissile()
 	{
 		for (int i = 0; i < 8; i++)
 		{
@@ -99,9 +96,9 @@ public class BulletCreater : MonoBehaviour {
 		}
 	}
 
-	void RoundMissile()
+	void OrbitMissile()
 	{
-		Round.transform.position = this.transform.position;
+		Orbit.transform.position = this.transform.position;
 	}
 
 	void OneRotationMissile()

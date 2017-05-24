@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+	const float SPAWN_PERCENT = 1.0f;
+
 	public GameObject DeadParticle;
 
 	public float chaseSpeed;
@@ -12,12 +14,16 @@ public class Enemy : MonoBehaviour {
 	protected Vector3 playerDir;
 	protected GameObject Item;
 
+	float RandomItem;
+
 	// Use this for initialization
 	void Start()
 	{
 		player = GameObject.Find("Player");
 		Item = Resources.Load("Prefabs/Item") as GameObject;
 		playerDir = new Vector3(0, 1, 0);
+		RandomItem = Random.Range(0, 10000.0f) / 100.0f;
+		this.gameObject.tag = TAGNAME.Enemy.ToString();
 	}
 
 	// Update is called once per frame
@@ -30,26 +36,27 @@ public class Enemy : MonoBehaviour {
 		chaseSpeed += Time.deltaTime * 0.1f;
 	}
 
-	virtual protected void PlayerDirMove()
+	protected virtual void PlayerDirMove()
 	{
-		playerDir = (player.transform.position - this.transform.position).normalized;
+		playerDir = player.transform.position - this.transform.position;
+		playerDir.Normalize();
 
 		//플레이어 방향으로 이동
 		this.transform.position += playerDir * chaseSpeed * Time.deltaTime;
 	}
 
-	protected void PlayerDirRotation(Vector3 pDir, Vector3 uDir)
+	protected void PlayerDirRotation(Vector3 pDir, Vector3 eDir)
 	{
 
 		pDir.Normalize();
-		uDir.Normalize();
+		eDir.Normalize();
 
 		float angle = 0;
 		Vector3 cross = Vector3.zero;
 		//플레이어 방향으로 머리 회전
 		//현재 머리의 방향은 up벡터
-		angle = Vector3.Dot(pDir, uDir);
-		cross = Vector3.Cross(uDir, pDir);
+		cross = Vector3.Cross(eDir, pDir);
+		angle = Vector3.Dot(pDir, eDir);
 		angle = Mathf.Acos(angle);
 
 
@@ -61,22 +68,35 @@ public class Enemy : MonoBehaviour {
 
 	void SpawnItem()
 	{
-		if (Random.Range(0, 100.0f) < 1.0f)
+		if (RandomItem < SPAWN_PERCENT)
 		{
 			Instantiate(Item, this.transform.position, Quaternion.identity);
 		}
 	}
 
-	bool Vec3Lenth(Vector3 v)
+	protected virtual void CollisionProcess()
 	{
-		return (v.x + v.y + v.z) > 0.0f ? true : false;
-	}
-
-	private void OnDestroy()
-	{
+		//파티클 생성
+		//이게 아니라면 파티클 매니저를 만들어서 여기서는 생성하라고 명령만해주고 실제 관리는 매니저를 통해서 하는 것도 괜찮을듯
 		GameObject par = Instantiate(DeadParticle, this.transform.position, Quaternion.identity) as GameObject;
 		par.GetComponent<ParticleSystem>().Play();
+
+		//아이템 생성
 		SpawnItem();
-		ScoreManager.Instance.AddScore();
+
+		//점수 증가
+		//Debug.Log("충돌");
+		//EnemyManager.Instance.RemoveEnemy(this.gameObject);
+		EnemyManager.Instance.OnDeath();
+		Destroy(this.gameObject);
+		//EnemyManager.Instance.RemoveEnemy(this.gameObject);
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.CompareTag(TAGNAME.PlayerBullet.ToString()))
+		{
+			CollisionProcess();
+		}
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
 	private static GameManager _instance = null;
@@ -22,15 +23,22 @@ public class GameManager : MonoBehaviour
 	}
 
 
+
 	// Use this for initialization
 	void Start()
 	{
-
+		
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-
+		if (EnemyManager.Instance.Count > 10)
+		{
+			EnemyManager.Instance.RemoveEnemy();
+		}
+		
 	}
+
+	
 }

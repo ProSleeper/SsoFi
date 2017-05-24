@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoundBullet : BigBullet
+public class OrbitBullet : BigBullet
 {
 	public float RoundSpeed;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {

@@ -30,9 +30,9 @@ public class BossEnemy : Enemy
 		player = GameObject.Find("Player");
 		Item = Resources.Load("Prefabs/Item") as GameObject;
 		playerDir = Vector3.zero;
-		ChangeTransTime = 0;
 		EndPosition = Vector3.zero;
 		StartPosition = Vector3.zero;
+		ChangeTransTime = 0;
 		IsMove = false;
 		InvokeRepeating("RandomTrans", 5, 5);
 		for (int i = 0; i < MOVEPOINT; i++)
@@ -51,7 +51,7 @@ public class BossEnemy : Enemy
 		chaseSpeed += Time.deltaTime * 0.1f;
 	}
 
-	override protected void PlayerDirMove()
+	protected override void PlayerDirMove()
 	{
 		if (IsMove)
 		{
@@ -68,9 +68,8 @@ public class BossEnemy : Enemy
 	void RandomTrans()
 	{
 		StartPosition = this.transform.position;
-		EndPosition = Point[Random.Range(0, MOVEPOINT) % 6].position;
+		EndPosition = Point[Random.Range(0, MOVEPOINT)].position;
 		EndPosition.z = 0;
 		IsMove = true;
-		Debug.Log(EndPosition);
 	}
 }

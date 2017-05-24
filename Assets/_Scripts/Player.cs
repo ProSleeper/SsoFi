@@ -4,17 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum MISSILE_TYPE
-{
-	MT_DEFAULT,
-	MT_BIG,
-	MT_EIGHTDIR,
-	MT_ROUND,
-	MT_ONEROUND,
-	MT_CHASE,
-	MT_MAX
-}
-
 public class Player : MonoBehaviour
 {
 	Vector3 mouseMovePos;
@@ -27,42 +16,34 @@ public class Player : MonoBehaviour
 	{
 		btn.onClick.AddListener(Restart);
 		btn.gameObject.SetActive(false);
+		this.gameObject.tag = TAGNAME.Player.ToString();
 	}
-	
-    void Update()
-    {
-		if (Input.GetMouseButtonDown(0))
-        {
-            mouseClickPos = Input.mousePosition;
-            mouseClickPos = Camera.main.ScreenToWorldPoint(mouseClickPos);
-            distance = this.gameObject.transform.position - mouseClickPos;
-        }
 
-        if(Input.GetMouseButton(0))
-        {
-            mouseMovePos = Input.mousePosition;
-            mouseMovePos = Camera.main.ScreenToWorldPoint(mouseMovePos);
-            this.transform.position =  mouseMovePos + distance;
+	void Update()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			mouseClickPos = Input.mousePosition;
+			mouseClickPos = Camera.main.ScreenToWorldPoint(mouseClickPos);
+			distance = this.gameObject.transform.position - mouseClickPos;
+		}
+
+		if (Input.GetMouseButton(0))
+		{
+			mouseMovePos = Input.mousePosition;
+			mouseMovePos = Camera.main.ScreenToWorldPoint(mouseMovePos);
+			this.transform.position = mouseMovePos + distance;
 		}
 		ScreenLock();
 	}
-
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (collision.gameObject.tag.Equals("Enemy"))
-		{
-			Debug.Log("플레이어 충돌!");
-			btn.gameObject.SetActive(true);
-		}
-	}
-
-	// Update is called once per frame
+	
 	void Restart()
 	{
 		btn.gameObject.SetActive(false);
 		SceneManager.LoadScene(0);
 	}
 
+	//화면 밖으로 나가지 않게 하는 코드인데 실제 폰에서 잘 동작하지 않음 수정이 필요!!
 	void ScreenLock()
 	{
 		Vector3 MinPos = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
@@ -86,6 +67,15 @@ public class Player : MonoBehaviour
 		if (this.transform.position.y > MaxPos.y)
 		{
 			this.transform.position = new Vector3(this.transform.position.x, MaxPos.y, this.transform.position.z);
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag.Contains(TAGNAME.Enemy.ToString()))
+		{
+			Debug.Log("플레이어 충돌!");
+			btn.gameObject.SetActive(true);
 		}
 	}
 }

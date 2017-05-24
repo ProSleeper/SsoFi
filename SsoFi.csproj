@@ -18,7 +18,7 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
+    <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,19 +75,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\_Scripts\BossEnemy.cs" />
     <Compile Include="Assets\_Scripts\Bullet\BigBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\BulletCreater.cs" />
     <Compile Include="Assets\_Scripts\Bullet\ChaseBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\DefaultBullet.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\DestroyBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\EightDirBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\OneRoundBullet.cs" />
-    <Compile Include="Assets\_Scripts\Bullet\RoundBullet.cs" />
-    <Compile Include="Assets\_Scripts\DestroyBullet.cs" />
-    <Compile Include="Assets\_Scripts\Enemy.cs" />
-    <Compile Include="Assets\_Scripts\EnemyManager.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\OrbitBullet.cs" />
+    <Compile Include="Assets\_Scripts\Enemy\BossEnemy.cs" />
+    <Compile Include="Assets\_Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\_Scripts\Enemy\EnemyManager.cs" />
     <Compile Include="Assets\_Scripts\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Item.cs" />
+    <Compile Include="Assets\_Scripts\ParticleAutoDelete.cs" />
     <Compile Include="Assets\_Scripts\Player.cs" />
     <Compile Include="Assets\_Scripts\ScoreManager.cs" />
   </ItemGroup>
