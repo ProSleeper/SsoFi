@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	
+	public GameObject DeadParticle;
 
 	public float chaseSpeed;
 
@@ -74,6 +74,8 @@ public class Enemy : MonoBehaviour {
 
 	private void OnDestroy()
 	{
+		GameObject par = Instantiate(DeadParticle, this.transform.position, Quaternion.identity) as GameObject;
+		par.GetComponent<ParticleSystem>().Play();
 		SpawnItem();
 		ScoreManager.Instance.AddScore();
 	}

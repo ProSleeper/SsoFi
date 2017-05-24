@@ -14,8 +14,7 @@ public class BossEnemy : Enemy
 {
 	const float CHANGETIME = 5;
 	const float MOVETIME = 2;
-	const int ScreenSizeX = 1440;
-	const int ScreenSizeY = 2560;
+	const int MOVEPOINT = 5;
 
 	float ChangeTransTime;
 	bool IsMove;
@@ -23,6 +22,7 @@ public class BossEnemy : Enemy
 	Vector3 StartPosition;
 	Vector3 EndPosition;
 
+	Transform[] Point = new Transform[MOVEPOINT];
 
 	// Use this for initialization
 	void Start()
@@ -35,6 +35,11 @@ public class BossEnemy : Enemy
 		StartPosition = Vector3.zero;
 		IsMove = false;
 		InvokeRepeating("RandomTrans", 5, 5);
+		for (int i = 0; i < MOVEPOINT; i++)
+		{
+			Point[i] = this.transform.parent.FindChild("Point" + (i + 1).ToString());
+		}
+		this.transform.position = Point[0].position;
 	}
 
 	// Update is called once per frame
@@ -62,9 +67,8 @@ public class BossEnemy : Enemy
 
 	void RandomTrans()
 	{
-		Vector3 temp = new Vector3(Random.Range((1440 * 0.1f), (1440 * 0.9f)), Random.Range((2560 * 0.1f), (2560 * 0.9f)), 0);
 		StartPosition = this.transform.position;
-		EndPosition = Camera.main.ScreenToWorldPoint(temp);
+		EndPosition = Point[Random.Range(0, MOVEPOINT) % 6].position;
 		EndPosition.z = 0;
 		IsMove = true;
 		Debug.Log(EndPosition);

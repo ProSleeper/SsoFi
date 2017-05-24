@@ -29,12 +29,6 @@ public class ScoreManager : MonoBehaviour {
 	void Start () {
 		Score = 0;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public void AddScore()
 	{
 		Score += 1;
