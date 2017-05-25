@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum TAGNAME
+public enum TAG_NAME
 {
 	Untagged,
 	Player,
@@ -31,7 +31,9 @@ public class EnemyManager : MonoBehaviour
     {
         _instance = this;
     }
-	
+
+	List<GameObject> EnemyList = new List<GameObject>();
+
 	public float spawnTime;
 
 	int DeathCount;
@@ -45,7 +47,7 @@ public class EnemyManager : MonoBehaviour
 
 	GameObject EnemyInfo;
 	GameObject SpawnEnemy;
-	Vector3 spawnPos;
+	Vector3 SpawnPos;
 
 	void Start()
     {
@@ -66,12 +68,13 @@ public class EnemyManager : MonoBehaviour
 
 	void Spawn()
 	{
-		spawnPos = new Vector3(Random.Range(10, Screen.width), Random.Range(10, Screen.height), 0);
-		spawnPos = Camera.main.ScreenToWorldPoint(spawnPos);
+		SpawnPos = new Vector3(Random.Range(10, Screen.width), Random.Range(10, Screen.height), 0);
+		SpawnPos = Camera.main.ScreenToWorldPoint(SpawnPos);
 
-		SpawnEnemy = Instantiate(EnemyInfo, spawnPos, Quaternion.identity) as GameObject;
+		SpawnEnemy = Instantiate(EnemyInfo, SpawnPos, Quaternion.identity) as GameObject;
 		SpawnEnemy.transform.position = new Vector3(SpawnEnemy.transform.position.x, SpawnEnemy.transform.position.y, 0);
 		SpawnEnemy.transform.parent = this.transform;
+		EnemyList.Add(SpawnEnemy);
 	}
 
     IEnumerator EnemySpawn()
@@ -95,7 +98,7 @@ public class EnemyManager : MonoBehaviour
 		//Debug.Log(DeathCount);
 	}
 
-	public void RemoveEnemy()
+	public void RemoveAllEnemy()
 	{
 		StopSpawn();
 		GameObject[] temp = new GameObject[this.transform.childCount];
@@ -111,12 +114,16 @@ public class EnemyManager : MonoBehaviour
 		//}
 
 		//하위 자식 전부 삭제 코드 2
-		for (int i = 0; i < this.transform.childCount; i++)
-		{
-			Destroy(this.transform.GetChild(0).gameObject);
-		}
-		
+		//for (int i = 0; i < this.transform.childCount; i++)
+		//{
+		//	Destroy(this.transform.GetChild(0).gameObject);
+		//}
 
-		Debug.Log("로드");
+		//하위 자식 전부 삭제 코드 3
+		foreach (GameObject item in EnemyList)
+		{
+			Destroy(item);
+		}
+		EnemyList.Clear();
 	}
 }

@@ -27,9 +27,9 @@ public class BossEnemy : Enemy
 	// Use this for initialization
 	void Start()
 	{
-		player = GameObject.Find("Player");
+		Player = GameObject.Find("Player");
 		Item = Resources.Load("Prefabs/Item") as GameObject;
-		playerDir = Vector3.zero;
+		PlayerDir = Vector3.zero;
 		EndPosition = Vector3.zero;
 		StartPosition = Vector3.zero;
 		ChangeTransTime = 0;
@@ -46,9 +46,9 @@ public class BossEnemy : Enemy
 	void Update()
 	{
 		PlayerDirMove();
-		PlayerDirRotation(playerDir, Vector3.up);
+		PlayerDirRotation(PlayerDir, Vector3.up);
 
-		chaseSpeed += Time.deltaTime * 0.1f;
+		ChaseSpeed += Time.deltaTime * 0.1f;
 	}
 
 	protected override void PlayerDirMove()

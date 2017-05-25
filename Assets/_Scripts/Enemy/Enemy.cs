@@ -6,12 +6,12 @@ public class Enemy : MonoBehaviour {
 
 	const float SPAWN_PERCENT = 1.0f;
 
-	public GameObject DeadParticle;
+	GameObject DeadParticle;
 
-	public float chaseSpeed;
+	public float ChaseSpeed;
 
-	protected GameObject player;
-	protected Vector3 playerDir;
+	protected GameObject Player;
+	protected Vector3 PlayerDir;
 	protected GameObject Item;
 
 	float RandomItem;
@@ -19,35 +19,35 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		player = GameObject.Find("Player");
+		Player = GameObject.Find("Player");
 		Item = Resources.Load("Prefabs/Item") as GameObject;
-		playerDir = new Vector3(0, 1, 0);
+		DeadParticle = Resources.Load("Prefabs/Enemy/EnemyParticleTriangle") as GameObject;
+		PlayerDir = Vector3.zero;
 		RandomItem = Random.Range(0, 10000.0f) / 100.0f;
-		this.gameObject.tag = TAGNAME.Enemy.ToString();
+		this.gameObject.tag = TAG_NAME.Enemy.ToString();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
 		PlayerDirMove();
-		PlayerDirRotation(playerDir, Vector3.up);
+		PlayerDirRotation(PlayerDir, Vector3.up);
 
 		//아주 미세하게 계속해서 적 속도 증가
-		chaseSpeed += Time.deltaTime * 0.1f;
+		ChaseSpeed += Time.deltaTime * 0.1f;
 	}
 
 	protected virtual void PlayerDirMove()
 	{
-		playerDir = player.transform.position - this.transform.position;
-		playerDir.Normalize();
+		PlayerDir = Player.transform.position - this.transform.position;
+		PlayerDir.Normalize();
 
 		//플레이어 방향으로 이동
-		this.transform.position += playerDir * chaseSpeed * Time.deltaTime;
+		this.transform.position += PlayerDir * ChaseSpeed * Time.deltaTime;
 	}
 
 	protected void PlayerDirRotation(Vector3 pDir, Vector3 eDir)
 	{
-
 		pDir.Normalize();
 		eDir.Normalize();
 
@@ -86,7 +86,6 @@ public class Enemy : MonoBehaviour {
 
 		//점수 증가
 		//Debug.Log("충돌");
-		//EnemyManager.Instance.RemoveEnemy(this.gameObject);
 		EnemyManager.Instance.OnDeath();
 		Destroy(this.gameObject);
 		//EnemyManager.Instance.RemoveEnemy(this.gameObject);
@@ -94,7 +93,7 @@ public class Enemy : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag(TAGNAME.PlayerBullet.ToString()))
+		if (collision.gameObject.CompareTag(TAG_NAME.PlayerBullet.ToString()))
 		{
 			CollisionProcess();
 		}

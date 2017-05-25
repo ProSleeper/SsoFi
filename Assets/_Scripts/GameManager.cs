@@ -1,7 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+public enum STAGE_PHASE
+{
+	Ready,
+	Normal,
+	Boss,
+	Max
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -22,8 +30,9 @@ public class GameManager : MonoBehaviour
 		_instance = this;
 	}
 
-
-
+	public Text FPS;
+	float CurTime = 0;
+	int FPSCount = 0;
 	// Use this for initialization
 	void Start()
 	{
@@ -33,12 +42,22 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (EnemyManager.Instance.Count > 10)
+		CurTime += Time.deltaTime;
+		if (CurTime > 1.0f)
 		{
-			EnemyManager.Instance.RemoveEnemy();
+			FPS.text = "FPS : " + FPSCount.ToString();
+			FPSCount = 0;
+			CurTime = 0;
+			
 		}
-		
-	}
+		else
+		{
+			FPSCount++;
+		}
 
-	
+		//if (EnemyManager.Instance.Count > 10)
+		//{
+		//	EnemyManager.Instance.RemoveAllEnemy();
+		//}	
+	}
 }

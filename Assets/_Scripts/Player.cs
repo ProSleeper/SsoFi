@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-	Vector3 mouseMovePos;
-	Vector3 mouseClickPos;
-	Vector3 distance;
+	Vector3 MouseMovePos;
+	Vector3 MouseClickPos;
+	Vector3 Distance;
 
 	public Button btn;
 	
@@ -16,23 +16,23 @@ public class Player : MonoBehaviour
 	{
 		btn.onClick.AddListener(Restart);
 		btn.gameObject.SetActive(false);
-		this.gameObject.tag = TAGNAME.Player.ToString();
+		this.gameObject.tag = TAG_NAME.Player.ToString();
 	}
 
 	void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			mouseClickPos = Input.mousePosition;
-			mouseClickPos = Camera.main.ScreenToWorldPoint(mouseClickPos);
-			distance = this.gameObject.transform.position - mouseClickPos;
+			MouseClickPos = Input.mousePosition;
+			MouseClickPos = Camera.main.ScreenToWorldPoint(MouseClickPos);
+			Distance = this.gameObject.transform.position - MouseClickPos;
 		}
 
 		if (Input.GetMouseButton(0))
 		{
-			mouseMovePos = Input.mousePosition;
-			mouseMovePos = Camera.main.ScreenToWorldPoint(mouseMovePos);
-			this.transform.position = mouseMovePos + distance;
+			MouseMovePos = Input.mousePosition;
+			MouseMovePos = Camera.main.ScreenToWorldPoint(MouseMovePos);
+			this.transform.position = MouseMovePos + Distance;
 		}
 		ScreenLock();
 	}
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag.Contains(TAGNAME.Enemy.ToString()))
+		if (collision.gameObject.tag.Contains(TAG_NAME.Enemy.ToString()))
 		{
 			Debug.Log("플레이어 충돌!");
 			btn.gameObject.SetActive(true);

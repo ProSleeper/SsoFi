@@ -18,7 +18,7 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion>4</LangVersion>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -93,7 +93,7 @@
     <Compile Include="Assets\_Scripts\ScoreManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\INFO.txt" />
+    <None Include="Assets\Data\Sound\INFO.txt" />
     <None Include="Assets\onscreencontrols\license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
