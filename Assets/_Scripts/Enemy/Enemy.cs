@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	const float SPAWN_PERCENT = 1.0f;
+	const float SPAWN_PERCENT = 100.0f;
 
-	GameObject DeadParticle;
+	//static GameObject DeadPrefab;
+	//protected static GameObject Player;
+	//protected static GameObject Item;
+	//static GameObject DestroyParticle;
+	protected Vector3 PlayerDir;
 
 	public float ChaseSpeed;
-
-	protected GameObject Player;
-	protected Vector3 PlayerDir;
-	protected GameObject Item;
-
 	float RandomItem;
 
+
+	//static void OnLoad()
+	//{
+	//	Player = GameObject.Find("Player");
+	//	Item = Resources.Load("Prefabs/Item") as GameObject;
+	//	DeadPrefab = Resources.Load("Prefabs/Enemy/EnemyParticleTriangle") as GameObject;
+	//}
+	//private void Awake()
+	//{
+	//	OnLoad();
+	//}
 	// Use this for initialization
 	void Start()
 	{
-		Player = GameObject.Find("Player");
-		Item = Resources.Load("Prefabs/Item") as GameObject;
-		DeadParticle = Resources.Load("Prefabs/Enemy/EnemyParticleTriangle") as GameObject;
+		//DestroyParticle = Instantiate(OnLoad.DeadPrefab);
+		//DestroyParticle.SetActive(false);
 		PlayerDir = Vector3.zero;
 		RandomItem = Random.Range(0, 10000.0f) / 100.0f;
 		this.gameObject.tag = TAG_NAME.Enemy.ToString();
@@ -39,7 +48,7 @@ public class Enemy : MonoBehaviour {
 
 	protected virtual void PlayerDirMove()
 	{
-		PlayerDir = Player.transform.position - this.transform.position;
+		PlayerDir = OnLoad.Player.transform.position - this.transform.position;
 		PlayerDir.Normalize();
 
 		//플레이어 방향으로 이동
@@ -70,7 +79,7 @@ public class Enemy : MonoBehaviour {
 	{
 		if (RandomItem < SPAWN_PERCENT)
 		{
-			Instantiate(Item, this.transform.position, Quaternion.identity);
+			Instantiate(OnLoad.Item, this.transform.position, Quaternion.identity);
 		}
 	}
 
@@ -78,8 +87,16 @@ public class Enemy : MonoBehaviour {
 	{
 		//파티클 생성
 		//이게 아니라면 파티클 매니저를 만들어서 여기서는 생성하라고 명령만해주고 실제 관리는 매니저를 통해서 하는 것도 괜찮을듯
-		GameObject par = Instantiate(DeadParticle, this.transform.position, Quaternion.identity) as GameObject;
-		par.GetComponent<ParticleSystem>().Play();
+		
+		//파티클 생성코드 #1.. 어떤게 더 나은지 궁금함.. 개인적으로는 생성하는것보다는 생성해놓고 활성화 하는게 소모값이 적다고 생각됨
+		Instantiate(OnLoad.DeadPrefab, this.transform.position, Quaternion.identity);
+		//par.GetComponent<ParticleSystem>().Play();	//Play On Awake를 키면 생략 가능
+
+		//파티클 생성코드 #2
+		//미리 생성한후 비활성화 상태에서 충돌할때 활성화후 위치 맞추고 파티클 재생
+		//DestroyParticle.SetActive(true);
+		//DestroyParticle.transform.position = this.transform.position;
+		//DestroyParticle.GetComponent<ParticleSystem>().Play();
 
 		//아이템 생성
 		SpawnItem();

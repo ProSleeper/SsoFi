@@ -30,11 +30,17 @@ public class Player : MonoBehaviour
 
 		if (Input.GetMouseButton(0))
 		{
+			//Time.timeScale = 0.2f;
 			MouseMovePos = Input.mousePosition;
 			MouseMovePos = Camera.main.ScreenToWorldPoint(MouseMovePos);
 			this.transform.position = MouseMovePos + Distance;
 		}
+		else
+		{
+			//Time.timeScale = 1f;
+		}
 		ScreenLock();
+		
 	}
 	
 	void Restart()

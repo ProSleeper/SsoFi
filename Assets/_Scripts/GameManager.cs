@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public enum STAGE_PHASE
 {
 	Ready,
-	Normal,
+	Common,
 	Boss,
-	Max
+	GamaOver
 }
 
 public class GameManager : MonoBehaviour
@@ -30,13 +30,18 @@ public class GameManager : MonoBehaviour
 		_instance = this;
 	}
 
-	public Text FPS;
+	Text FPS;
 	float CurTime = 0;
 	int FPSCount = 0;
-	// Use this for initialization
+	STAGE_PHASE CurPhase;
+	EnemyManager em;
+
 	void Start()
 	{
-		
+		CurPhase = STAGE_PHASE.Ready;
+		FPS = GameObject.Find("FPS").GetComponent<Text>();
+		em = this.GetComponent<EnemyManager>();
+		Invoke("CommonStage", 3);
 	}
 
 	// Update is called once per frame
@@ -54,10 +59,23 @@ public class GameManager : MonoBehaviour
 		{
 			FPSCount++;
 		}
+	}
 
-		//if (EnemyManager.Instance.Count > 10)
-		//{
-		//	EnemyManager.Instance.RemoveAllEnemy();
-		//}	
+	void CommonStage()
+	{
+		//CurPhase = STAGE_PHASE.Common;
+		em.StartSpawn();
+	}
+
+	void BossStage()
+	{
+		//CurPhase = STAGE_PHASE.Boss;
+		//em.StopSpawn();
+		//em.BossSpawn();
+	}
+
+	void StageGameOver()
+	{
+		//CurPhase = STAGE_PHASE.GamaOver;
 	}
 }

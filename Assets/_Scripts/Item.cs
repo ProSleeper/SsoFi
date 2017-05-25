@@ -2,23 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BULLET_TYPE
-{
-	BT_DEFAULT,
-	BT_BIG,
-	BT_EIGHTDIR,
-	BT_ORBIT,
-	BT_ONEROUND,
-	BT_CHASE,
-	BT_MAX
-}
-
 public class Item : MonoBehaviour
 {
 	public float RotSpeed;
 	float Speed;
 	BULLET_TYPE RandomBullet;
-
+	
 	private void Start()
 	{
 		this.gameObject.tag = TAG_NAME.Item.ToString();
@@ -35,8 +24,7 @@ public class Item : MonoBehaviour
 	{
 		if (collision.gameObject.tag.Equals(TAG_NAME.Player.ToString()))
 		{
-			collision.gameObject.GetComponent<BulletCreater>().BulletChange(RandomBullet);
-
+			collision.gameObject.GetComponent<BulletCreater>().BulletGeneratorChange(RandomBullet);
 			Destroy(this.gameObject);
 		}
 	}

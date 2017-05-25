@@ -27,8 +27,8 @@ public class BossEnemy : Enemy
 	// Use this for initialization
 	void Start()
 	{
-		Player = GameObject.Find("Player");
-		Item = Resources.Load("Prefabs/Item") as GameObject;
+		OnLoad.Player = GameObject.Find("Player");
+		OnLoad.Item = Resources.Load("Prefabs/Item") as GameObject;
 		PlayerDir = Vector3.zero;
 		EndPosition = Vector3.zero;
 		StartPosition = Vector3.zero;
