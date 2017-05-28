@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigGenerator : BulletGenerator
+public class BigGenerator : Generator
 {
 	// Use this for initialization
 	void Start () {
 		//MaxFireSpeed = 1.5f;
-		Bullet = Resources.Load("Prefabs/Bullet/BigBullet") as GameObject;
+		Bullet = Resources.Load("Prefabs/Bullet/Entity/BigBullet") as GameObject;
 	}
 }

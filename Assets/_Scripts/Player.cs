@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 		this.gameObject.tag = TAG_NAME.Player.ToString();
 	}
 
+	
 	void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
@@ -30,14 +31,20 @@ public class Player : MonoBehaviour
 
 		if (Input.GetMouseButton(0))
 		{
-			//Time.timeScale = 0.2f;
+			//float s = 0;
+			//float g = 1;
+			//float dTime = 0;
+			//dTime += Time.deltaTime * 10;
+			//Time.timeScale = Mathf.Lerp(s, g, dTime / 2);
+			//Debug.Log(Mathf.Lerp(s, g, dTime / 2));
 			MouseMovePos = Input.mousePosition;
 			MouseMovePos = Camera.main.ScreenToWorldPoint(MouseMovePos);
 			this.transform.position = MouseMovePos + Distance;
 		}
 		else
 		{
-			//Time.timeScale = 1f;
+			//Time.timeScale = 5f;
+			//dTime = 0;
 		}
 		ScreenLock();
 		
@@ -53,7 +60,7 @@ public class Player : MonoBehaviour
 	void ScreenLock()
 	{
 		Vector3 MinPos = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
-		Vector3 MaxPos = Camera.main.ScreenToWorldPoint(new Vector3(1440, 2560, 0));
+		Vector3 MaxPos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
 		if (this.transform.position.x < MinPos.x)
 		{
@@ -78,7 +85,7 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag.Contains(TAG_NAME.Enemy.ToString()))
+		if (OnLoad.GetColl(this.tag, collision.tag))
 		{
 			Debug.Log("플레이어 충돌!");
 			btn.gameObject.SetActive(true);

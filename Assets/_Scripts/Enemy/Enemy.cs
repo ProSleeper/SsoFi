@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	const float SPAWN_PERCENT = 100.0f;
+	const float SPAWN_PERCENT = 5.0f;
 
 	//static GameObject DeadPrefab;
 	//protected static GameObject Player;
@@ -12,8 +12,20 @@ public class Enemy : MonoBehaviour {
 	//static GameObject DestroyParticle;
 	protected Vector3 PlayerDir;
 
-	public float ChaseSpeed;
+	protected float ChaseSpeed;
 	float RandomItem;
+
+	public float pChaseSpeed
+	{
+		get
+		{
+			return ChaseSpeed;
+		}
+		set
+		{
+			ChaseSpeed = value;
+		}
+	}
 
 
 	//static void OnLoad()
@@ -83,36 +95,31 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-	protected virtual void CollisionProcess()
+
+	public virtual void SpawnParticle()
 	{
-		//파티클 생성
-		//이게 아니라면 파티클 매니저를 만들어서 여기서는 생성하라고 명령만해주고 실제 관리는 매니저를 통해서 하는 것도 괜찮을듯
-		
-		//파티클 생성코드 #1.. 어떤게 더 나은지 궁금함.. 개인적으로는 생성하는것보다는 생성해놓고 활성화 하는게 소모값이 적다고 생각됨
-		Instantiate(OnLoad.DeadPrefab, this.transform.position, Quaternion.identity);
-		//par.GetComponent<ParticleSystem>().Play();	//Play On Awake를 키면 생략 가능
+		Instantiate(OnLoad.EnemyParticle, this.transform.position, Quaternion.identity);
+	}
 
-		//파티클 생성코드 #2
-		//미리 생성한후 비활성화 상태에서 충돌할때 활성화후 위치 맞추고 파티클 재생
-		//DestroyParticle.SetActive(true);
-		//DestroyParticle.transform.position = this.transform.position;
-		//DestroyParticle.GetComponent<ParticleSystem>().Play();
-
-		//아이템 생성
+	public virtual void CollisionProcess()
+	{
+		SpawnParticle();
 		SpawnItem();
-
-		//점수 증가
-		//Debug.Log("충돌");
-		EnemyManager.Instance.OnDeath();
+		EnemyManager.Instance.OnDeath(this.gameObject);
 		Destroy(this.gameObject);
 		//EnemyManager.Instance.RemoveEnemy(this.gameObject);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag(TAG_NAME.PlayerBullet.ToString()))
+		if (OnLoad.GetColl(this.tag, collision.tag))
 		{
-			CollisionProcess();
+			if (collision.gameObject.CompareTag(TAG_NAME.PlayerBullet.ToString()))
+			{
+				CollisionProcess();
+			}
 		}
 	}
+
+
 }

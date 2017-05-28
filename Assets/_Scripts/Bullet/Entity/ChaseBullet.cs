@@ -16,6 +16,8 @@ public class ChaseBullet : MonoBehaviour {
 		}
 	}
 
+
+
 	private void Update()
 	{
 		if (IsCrash && EnemyDir != null)

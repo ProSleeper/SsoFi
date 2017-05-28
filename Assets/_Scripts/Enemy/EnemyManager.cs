@@ -2,33 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum TAG_NAME
-{
-	Untagged,
-	Player,
-	PlayerBullet,
-	Enemy,
-	EnemyBullet,
-	Item
-}
-
-//Enemy에서 사용할 것들.. 한번씩만 로드하면 되는데 Enemy 코드에 넣으면 생성 될때마다 하기에 이렇게 둠..
-//나중엔 이런종류를 한군데다가 모아서 한번에 로드시키는게 좋을듯
-public static class OnLoad
-{
-	public static GameObject DeadPrefab;
-	public static GameObject Player;
-	public static GameObject Item;
-
-	public static void OnEnemyDataLoad()
-	{
-		Player = GameObject.Find("Player");
-		Item = Resources.Load("Prefabs/Item") as GameObject;
-		DeadPrefab = Resources.Load("Prefabs/Enemy/EnemyParticleTriangle") as GameObject;
-	}
-}
-
 public class EnemyManager : MonoBehaviour
 {
     private static EnemyManager _instance = null;
@@ -61,7 +34,7 @@ public class EnemyManager : MonoBehaviour
 	GameObject SpawnEnemy;
 	GameObject BossInfo;
 	GameObject BossEnemy;
-
+	
 	Vector3 SpawnPos;
 
 	void Start()
@@ -86,9 +59,15 @@ public class EnemyManager : MonoBehaviour
 	{
 		SpawnPos = new Vector3(Random.Range(10, Screen.width), Random.Range(10, Screen.height), 0);
 		SpawnPos = Camera.main.ScreenToWorldPoint(SpawnPos);
+		SpawnPos.z = 0;
+
+		if (Mathf.Abs((OnLoad.Player.transform.position - SpawnPos).magnitude) < 4.0f) 
+		{
+			return;
+		}
 
 		SpawnEnemy = Instantiate(EnemyInfo, SpawnPos, Quaternion.identity) as GameObject;
-		SpawnEnemy.transform.position = new Vector3(SpawnEnemy.transform.position.x, SpawnEnemy.transform.position.y, 0);
+		SpawnEnemy.GetComponent<Enemy>().pChaseSpeed = 2;
 		SpawnEnemy.transform.parent = this.transform;
 		EnemyList.Add(SpawnEnemy);
 	}
@@ -108,12 +87,14 @@ public class EnemyManager : MonoBehaviour
 		RemoveAllEnemy();
 	}
 
-	public void OnDeath()
+	public void OnDeath(GameObject RemoveEnemy)
 	{
 		DeathCount++;
 		ScoreManager.Instance.AddScore();
 
-		Debug.Log(DeathCount);
+
+		EnemyList.Remove(RemoveEnemy);
+		//Debug.Log(DeathCount);
 		if (DeathCount > MaxDeathCount)
 		{
 			StopSpawn();
@@ -143,9 +124,10 @@ public class EnemyManager : MonoBehaviour
 		//}
 
 		//하위 자식 전부 삭제 코드 3
-		foreach (GameObject item in EnemyList)
+		foreach (GameObject enemy in EnemyList)
 		{
-			Destroy(item);
+			enemy.GetComponent<Enemy>().SpawnParticle();
+			Destroy(enemy);
 		}
 		EnemyList.Clear();
 	}

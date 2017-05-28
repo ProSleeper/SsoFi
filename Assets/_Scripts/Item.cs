@@ -22,9 +22,10 @@ public class Item : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag.Equals(TAG_NAME.Player.ToString()))
+		if (OnLoad.GetColl(this.tag, collision.tag))
 		{
-			collision.gameObject.GetComponent<BulletCreater>().BulletGeneratorChange(RandomBullet);
+			collision.gameObject.GetComponent<PlayerBulletCreator>().BulletGeneratorChange(RandomBullet);
+			//collision.gameObject.GetComponentInChildren<PlayerGun>().BulletGeneratorChange(RandomBullet);
 			Destroy(this.gameObject);
 		}
 	}

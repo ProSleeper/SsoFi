@@ -32,6 +32,6 @@ public class ScoreManager : MonoBehaviour {
 	public void AddScore()
 	{
 		Score += 1;
-		//Debug.Log(Score);
+		Debug.Log(Score);
 	}
 }
