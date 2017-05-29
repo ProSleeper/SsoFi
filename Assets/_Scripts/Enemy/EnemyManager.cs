@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour
 		OnLoad.OnEnemyDataLoad();
 	}
 
-	const int MaxDeathCount = 100;
+	const int MaxDeathCount = 10;
 
 	List<GameObject> EnemyList = new List<GameObject>();
 
@@ -65,13 +65,13 @@ public class EnemyManager : MonoBehaviour
 		SpawnPos = Camera.main.ScreenToWorldPoint(SpawnPos);
 		SpawnPos.z = 0;
 
-		if (Mathf.Abs((OnLoad.Player.transform.position - SpawnPos).magnitude) < 4.0f) 
+		if (Mathf.Abs((OnLoad.Player.transform.position - SpawnPos).magnitude) < 6.0f) 
 		{
 			return;
 		}
 
 		SpawnEnemy = Instantiate(EnemyInfo, SpawnPos, Quaternion.identity) as GameObject;
-		SpawnEnemy.GetComponent<Enemy>().pChaseSpeed = 2;
+		SpawnEnemy.GetComponent<Enemy>().CHASESPEED = 2;
 		SpawnEnemy.transform.parent = this.transform;
 		EnemyList.Add(SpawnEnemy);
 	}

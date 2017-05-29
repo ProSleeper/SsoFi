@@ -16,7 +16,7 @@ public class EightGenerator : OneRotateGenerator
 		{
 			GameObject spawn_bullet = Instantiate(Bullet, this.gameObject.transform.position, Quaternion.identity) as GameObject;
 			spawn_bullet.transform.localScale = BulletSize;
-			spawn_bullet.GetComponent<OneRotateBullet>().BulletAddForce = MoveSpeed;
+			spawn_bullet.GetComponent<OneRotateBullet>().BULLETSPEED = MoveSpeed;
 			spawn_bullet.transform.GetComponent<OneRotateBullet>().BulletDir = Quaternion.Euler(0, 0, AugmentDegree * i) * Vector3.right;
 			spawn_bullet.tag = this.tag;
 		}

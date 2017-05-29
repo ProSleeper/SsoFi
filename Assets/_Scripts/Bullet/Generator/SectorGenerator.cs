@@ -21,7 +21,7 @@ public class SectorGenerator : OneRotateGenerator
 		{
 			GameObject spawn_bullet = Instantiate(Bullet, this.gameObject.transform.position, Quaternion.identity) as GameObject;
 			spawn_bullet.transform.localScale = BulletSize;
-			spawn_bullet.GetComponent<SectorBullet>().BulletAddForce = MoveSpeed;
+			spawn_bullet.GetComponent<SectorBullet>().BULLETSPEED = MoveSpeed;
 			//spawn_bullet.GetComponent<SectorBullet>().BulletDir = temp + (new Vector3(0.1f, 0.1f, 0) * i);
 
 			spawn_bullet.GetComponent<SectorBullet>().BulletDir = Quaternion.Euler(0, 0, AugmentDegree * i) * temp;

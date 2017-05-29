@@ -15,7 +15,7 @@ public class ThinTimeGenerator : Generator
 	public override void FireMissile()
 	{
 		GameObject temp = Instantiate(Bullet, this.transform.position, Quaternion.identity);
-		temp.GetComponent<ThinTimeBullet>().BulletAddForce = MoveSpeed;
+		temp.GetComponent<ThinTimeBullet>().BULLETSPEED = MoveSpeed;
 		temp.GetComponent<ThinTimeBullet>().BombTime = BTime;
 		temp.GetComponent<ThinTimeBullet>().BombScope = BScope;
 		temp.transform.localScale = BulletSize;

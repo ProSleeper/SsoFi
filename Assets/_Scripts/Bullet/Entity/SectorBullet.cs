@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SectorBullet : DefaultBullet
 {
-	// Use this for initialization
 	void Awake()
     {
 		BulletDir = Vector3.zero - this.transform.position;
@@ -18,5 +17,4 @@ public class SectorBullet : DefaultBullet
 		
 	}
 
-	// Update is called once per frame
 }

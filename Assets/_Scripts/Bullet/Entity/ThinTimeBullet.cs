@@ -37,9 +37,14 @@ public class ThinTimeBullet : DefaultBullet
 
 	public override void SpawnParticle(Vector3 ExactPos)
 	{
-		GameObject temp = Instantiate(OnLoad.ThinBulletParticle, ExactPos, Quaternion.identity);
-		ParticleSystem.MainModule ps = temp.GetComponent<ParticleSystem>().main;
-		ParticleSystem pe = temp.GetComponent<ParticleSystem>();
+		GameObject particle = Instantiate(OnLoad.ThinBulletParticle, ExactPos, Quaternion.identity);
+		ParticleSetting(particle);
+	}
+
+	public override void ParticleSetting(GameObject particle)
+	{
+		ParticleSystem.MainModule ps = particle.GetComponent<ParticleSystem>().main;
+		ParticleSystem pe = particle.GetComponent<ParticleSystem>();
 		ps.startSpeed = BombScope;
 		ps.maxParticles = (int)BombScope * 25;
 		ParticleSystem.Burst[] pb = new ParticleSystem.Burst[1];
@@ -47,5 +52,6 @@ public class ThinTimeBullet : DefaultBullet
 		pb[0].maxCount = (short)ps.maxParticles;
 		pe.emission.SetBursts(pb);
 	}
-	
+
+
 }

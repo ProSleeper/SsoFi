@@ -36,6 +36,7 @@ public static class OnLoad
 	public static GameObject Item;
 
 	static bool[,] collTag;
+	static Dictionary<string, TAG_NAME> DicTagName = new Dictionary<string, TAG_NAME>();
 
 	public static void OnEnemyDataLoad()
 	{
@@ -63,13 +64,22 @@ public static class OnLoad
 		collTag[(int)TAG_NAME.PlayerBullet, (int)TAG_NAME.Enemy] = true;
 		collTag[(int)TAG_NAME.Enemy, (int)TAG_NAME.PlayerBullet] = true;
 
+		DicTagName.Clear();
+
+		for (int i = 0; i < (int)TAG_NAME.Max; i++)
+		{
+			DicTagName.Add(((TAG_NAME)i).ToString(), (TAG_NAME)i);
+		}
 	}
 
 	public static bool GetColl(string thisObject, string collObject)
 	{
-		int thisNum = (int)Enum.Parse(typeof(TAG_NAME), thisObject);
-		int collNum = (int)Enum.Parse(typeof(TAG_NAME), collObject);
-		return collTag[thisNum, collNum];
+		TAG_NAME thisNum;
+		TAG_NAME collNum;
+		DicTagName.TryGetValue(thisObject, out thisNum);
+		DicTagName.TryGetValue(collObject, out collNum);
+
+		return collTag[(int)thisNum, (int)collNum];
 	}
 }
 

@@ -31,7 +31,7 @@ public abstract class Generator : MonoBehaviour
 	public virtual void FireMissile()
 	{
 		GameObject temp = Instantiate(Bullet, this.transform.position, Quaternion.identity);
-		temp.GetComponent<DefaultBullet>().BulletAddForce = MoveSpeed;
+		temp.GetComponent<DefaultBullet>().BULLETSPEED = MoveSpeed;
 		temp.transform.localScale = BulletSize;
 		temp.tag = this.tag;
 		//Instantiate()

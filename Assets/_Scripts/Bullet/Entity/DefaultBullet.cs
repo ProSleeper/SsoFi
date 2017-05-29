@@ -5,10 +5,11 @@ using UnityEngine;
 public class DefaultBullet : MonoBehaviour
 {
 	protected float BulletSpeed;
+	protected float BulletDamage;
     [HideInInspector]
 	public Vector3 BulletDir = Vector3.zero;
 
-	public float BulletAddForce
+	public float BULLETSPEED
 	{
 		get
 		{
@@ -20,6 +21,14 @@ public class DefaultBullet : MonoBehaviour
 		}
 	}
 
+	public float BULLETDAMAGE
+	{
+		get
+		{
+			return BulletDamage;
+		}
+	}
+
 	// Use this for initialization
 	void Start()
     {
@@ -28,6 +37,7 @@ public class DefaultBullet : MonoBehaviour
 		{
 			BulletDir = Vector3.up;
 		}
+		BulletDamage = 10;
 	}
 
     // Update is called once per frame
@@ -82,9 +92,14 @@ public class DefaultBullet : MonoBehaviour
 
 	public virtual void SpawnParticle(Vector3 ExactPos)
 	{
-		GameObject temp = Instantiate(OnLoad.BulletParticle, ExactPos, Quaternion.identity);
-		ParticleSystem.MainModule ps = temp.GetComponent<ParticleSystem>().main;
-		ParticleSystem pe = temp.GetComponent<ParticleSystem>();
+		GameObject particle = Instantiate(OnLoad.BulletParticle, ExactPos, Quaternion.identity);
+		ParticleSetting(particle);
+	}
+
+	public virtual void ParticleSetting(GameObject particle)
+	{
+		ParticleSystem.MainModule ps = particle.GetComponent<ParticleSystem>().main;
+		ParticleSystem pe = particle.GetComponent<ParticleSystem>();
 		float size = this.transform.localScale.x;
 		ps.startSize = size;
 		ps.startSpeed = size * 4;
@@ -95,4 +110,7 @@ public class DefaultBullet : MonoBehaviour
 		pb[0].maxCount = (short)ps.maxParticles;
 		pe.emission.SetBursts(pb);
 	}
+
+
+
 }

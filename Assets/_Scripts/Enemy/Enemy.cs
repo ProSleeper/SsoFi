@@ -5,17 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	const float SPAWN_PERCENT = 3.0f;
+	const int MAXHP = 5;
 
-	//static GameObject DeadPrefab;
-	//protected static GameObject Player;
-	//protected static GameObject Item;
-	//static GameObject DestroyParticle;
 	protected Vector3 PlayerDir;
-
+	protected float Health;
 	protected float ChaseSpeed;
+
 	float RandomItem;
 
-	public float pChaseSpeed
+	public float CHASESPEED
 	{
 		get
 		{
@@ -28,27 +26,14 @@ public class Enemy : MonoBehaviour {
 	}
 
 
-	//static void OnLoad()
-	//{
-	//	Player = GameObject.Find("Player");
-	//	Item = Resources.Load("Prefabs/Item") as GameObject;
-	//	DeadPrefab = Resources.Load("Prefabs/Enemy/EnemyParticleTriangle") as GameObject;
-	//}
-	//private void Awake()
-	//{
-	//	OnLoad();
-	//}
-	// Use this for initialization
 	void Start()
 	{
-		//DestroyParticle = Instantiate(OnLoad.DeadPrefab);
-		//DestroyParticle.SetActive(false);
 		PlayerDir = Vector3.zero;
 		RandomItem = Random.Range(0, 10000.0f) / 100.0f;
 		this.gameObject.tag = TAG_NAME.Enemy.ToString();
+		Health = MAXHP;
 	}
-
-	// Update is called once per frame
+	
 	void Update()
 	{
 		PlayerDirMove();
@@ -107,7 +92,6 @@ public class Enemy : MonoBehaviour {
 		SpawnItem();
 		EnemyManager.Instance.OnDeath(this.gameObject);
 		Destroy(this.gameObject);
-		//EnemyManager.Instance.RemoveEnemy(this.gameObject);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -116,10 +100,20 @@ public class Enemy : MonoBehaviour {
 		{
 			if (collision.gameObject.CompareTag(TAG_NAME.PlayerBullet.ToString()))
 			{
-				CollisionProcess();
+				//이 부분은 생각을 해봐야 할듯..
+				//일단 통일이 가능하게 하려면 체력 스크립트를 따로 짜야된다는 생각.
+				CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
 			}
 		}
 	}
 
+	public virtual void CalculateHealth(float damage)
+	{
+		Health -= damage;
+		if (Health <= 0)
+		{
+			CollisionProcess();
+		}
+	}
 
 }

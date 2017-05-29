@@ -15,26 +15,22 @@ public class BossEnemy : Enemy
 	const float CHANGETIME = 5f;
 	const float MOVETIME = 2f;
 	const int MOVEPOINT = 3;
-	const int MAXHP = 100;
-
+	const int MAXHP = 700;
 
 	float ChangeTransTime;
-	float CurHp;
 	
 	Vector3 StartPosition;
 	Vector3 EndPosition;
 
 	Transform[] Point = new Transform[MOVEPOINT];
-	BossBulletCreator BulletControler;
+	BossBulletCreator BulletController;
 	
 	BOSS_STATE CurState;
 		
 	void Start()
 	{
-		OnLoad.Player = GameObject.Find("Player");
-		OnLoad.Item = Resources.Load("Prefabs/Item") as GameObject;
-		BulletControler = this.transform.GetChild(0).GetComponent<BossBulletCreator>();
-		BulletControler.gameObject.SetActive(false);
+		BulletController = this.transform.GetChild(0).GetComponent<BossBulletCreator>();
+		BulletController.gameObject.SetActive(false);
 		PlayerDir = Vector3.zero;
 		EndPosition = Vector3.zero;
 		StartPosition = Vector3.zero;
@@ -47,12 +43,10 @@ public class BossEnemy : Enemy
 			{
 				Point[sonCount++] = this.transform.parent.GetChild(i);
 			}
-			
 		}
 		this.transform.position = Point[0].position;
 		CurState = BOSS_STATE.BS_IDLE;
-		CurHp = MAXHP;
-		
+		Health = MAXHP;
 		this.gameObject.tag = TAG_NAME.Enemy.ToString();
 	}
 
@@ -91,26 +85,20 @@ public class BossEnemy : Enemy
 
 	void AttackPlayer()
 	{
-		BulletControler.gameObject.SetActive(true);
+		BulletController.gameObject.SetActive(true);
 	}
 
 	void StopAttack()
 	{
-		BulletControler.gameObject.SetActive(false);
+		BulletController.gameObject.SetActive(false);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (OnLoad.GetColl(this.tag, collision.tag))
 		{
-			CurHp -= 1;
-			Debug.Log("으악");
-			this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (1.0f / MAXHP) * CurHp);
-			if (CurHp <= 30)
-			{
-				Destroy(this.transform.gameObject);
-			}
-			//Destroy(this.transform.gameObject);
+			//수정해야할코드
+			CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
 		}
 	}
 
@@ -118,14 +106,24 @@ public class BossEnemy : Enemy
 	{
 		if (OnLoad.GetColl(this.tag, collision.tag))
 		{
-			CurHp -= 1;
-			Debug.Log("으악");
-			this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (1.0f / MAXHP) * CurHp);
-			if (CurHp <= 30)
-			{
-				Destroy(this.transform.gameObject);
-			}
-			//Destroy(this.transform.gameObject);
+			//수정해야할코드
+			CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
+		}
+	}
+
+	public override void CollisionProcess()
+	{
+		Destroy(this.transform.gameObject);
+	}
+
+	public override void CalculateHealth(float damage)
+	{
+		Health -= damage;
+		Debug.Log("으악");
+		this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (1.0f / MAXHP) * (Health + 350));
+		if (Health <= 0)
+		{
+			CollisionProcess();
 		}
 	}
 }
