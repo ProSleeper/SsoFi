@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	const float SPAWN_PERCENT = 5.0f;
+	const float SPAWN_PERCENT = 3.0f;
 
 	//static GameObject DeadPrefab;
 	//protected static GameObject Player;

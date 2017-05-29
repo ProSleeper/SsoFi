@@ -23,15 +23,19 @@ public class ScoreManager : MonoBehaviour {
 
 	[HideInInspector]
 	public int Score;
+	UILabel ScoreText;
 
-	
 	// Use this for initialization
 	void Start () {
 		Score = 0;
+		ScoreText = GameObject.Find("Score").GetComponent<UILabel>();
+		ScoreText.text = "Score: 0";
 	}
+
 	public void AddScore()
 	{
-		Score += 1;
+		Score += 5;
+		ScoreText.text = "Score: " +  Score.ToString();
 		Debug.Log(Score);
 	}
 }

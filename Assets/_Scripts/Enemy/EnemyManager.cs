@@ -37,11 +37,15 @@ public class EnemyManager : MonoBehaviour
 	
 	Vector3 SpawnPos;
 
+	UILabel MonsterCount;
+
 	void Start()
     {
 		EnemyInfo = Resources.Load("Prefabs/Enemy/Enemy") as GameObject;
 		BossInfo = Resources.Load("Prefabs/Enemy/BossEnemy") as GameObject;
 		DeathCount = 0;
+		MonsterCount = GameObject.Find("DeadCount").GetComponent<UILabel>();
+		MonsterCount.text = DeathCount.ToString() + " / " + MaxDeathCount.ToString();
 		//StartSpawn();
 	}
 
@@ -91,11 +95,11 @@ public class EnemyManager : MonoBehaviour
 	{
 		DeathCount++;
 		ScoreManager.Instance.AddScore();
-
+		MonsterCount.text = DeathCount.ToString() + " / " + MaxDeathCount.ToString();
 
 		EnemyList.Remove(RemoveEnemy);
 		//Debug.Log(DeathCount);
-		if (DeathCount > MaxDeathCount)
+		if (DeathCount >= MaxDeathCount)
 		{
 			StopSpawn();
 			BossSpawn();

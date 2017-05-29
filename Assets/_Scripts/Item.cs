@@ -11,7 +11,7 @@ public class Item : MonoBehaviour
 	private void Start()
 	{
 		this.gameObject.tag = TAG_NAME.Item.ToString();
-		RandomBullet = (BULLET_TYPE)(Random.Range(0, 600) / 100);
+		RandomBullet = (BULLET_TYPE)(Random.Range(0, ((int)BULLET_TYPE.BT_MAX) * 100) / 100);
 	}
 
 	// Update is called once per frame
