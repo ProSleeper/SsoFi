@@ -95,19 +95,26 @@ public class BossEnemy : Enemy
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (TagCheck.GetColl(this.tag, collision.tag))
 		{
-			//수정해야할코드
-			CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
+			if (collision.tag.Equals("PlayerBullet"))
+			{
+				//수정해야할코드
+				CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
+			}
+			
 		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (TagCheck.GetColl(this.tag, collision.tag))
 		{
-			//수정해야할코드
-			CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
+			if (collision.tag.Equals("PlayerBullet"))
+			{
+				//수정해야할코드
+				CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
+			}
 		}
 	}
 

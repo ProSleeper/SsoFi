@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
 	void Awake()
     {
         _instance = this;
-		OnLoad.OnEnemyDataLoad();
+		LoadData.OnDataLoad();
 	}
 
 	const int MaxDeathCount = 10;
@@ -65,7 +65,7 @@ public class EnemyManager : MonoBehaviour
 		SpawnPos = Camera.main.ScreenToWorldPoint(SpawnPos);
 		SpawnPos.z = 0;
 
-		if (Mathf.Abs((OnLoad.Player.transform.position - SpawnPos).magnitude) < 6.0f) 
+		if (Mathf.Abs((LoadData.Player.transform.position - SpawnPos).magnitude) < 6.0f) 
 		{
 			return;
 		}

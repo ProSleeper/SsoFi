@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (TagCheck.GetColl(this.tag, collision.tag))
 		{
 			Debug.Log("플레이어 충돌!");
 			btn.gameObject.SetActive(true);

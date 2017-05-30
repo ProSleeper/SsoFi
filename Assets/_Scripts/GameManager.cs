@@ -26,62 +26,7 @@ public enum TAG_NAME
 
 //Enemy에서 사용할 것들.. 한번씩만 로드하면 되는데 Enemy 코드에 넣으면 생성 될때마다 하기에 이렇게 둠..
 //나중엔 이런종류를 한군데다가 모아서 한번에 로드시키는게 좋을듯
-public static class OnLoad
-{
-	public static GameObject EnemyParticle;
-	public static GameObject BulletParticle;
-	public static GameObject ThinBulletParticle;
-	public static GameObject ThinSubBullet;
-	public static GameObject Player;
-	public static GameObject Item;
 
-	static bool[,] collTag;
-	static Dictionary<string, TAG_NAME> DicTagName = new Dictionary<string, TAG_NAME>();
-
-	public static void OnEnemyDataLoad()
-	{
-		Player = GameObject.Find("Player");
-		Item = Resources.Load("Prefabs/Item/Item") as GameObject;
-		ThinSubBullet = Resources.Load("Prefabs/Bullet/Entity/SubEntity/ExplosionScope") as GameObject;
-
-		EnemyParticle = Resources.Load("Prefabs/Enemy/EnemyParticleTriangle") as GameObject;
-		BulletParticle = Resources.Load("Prefabs/Bullet/BulletParticle") as GameObject;
-		ThinBulletParticle = Resources.Load("Prefabs/Bullet/ThinBulletParticle") as GameObject;
-	}
-
-	public static void SetColl()
-	{
-		collTag = new bool[(int)TAG_NAME.Max, (int)TAG_NAME.Max];
-
-		collTag[(int)TAG_NAME.Player, (int)TAG_NAME.Enemy] = true;
-		collTag[(int)TAG_NAME.Enemy, (int)TAG_NAME.Player] = true;
-
-		collTag[(int)TAG_NAME.Player, (int)TAG_NAME.EnemyBullet] = true;
-		collTag[(int)TAG_NAME.EnemyBullet, (int)TAG_NAME.Player] = true;
-		
-		collTag[(int)TAG_NAME.Item, (int)TAG_NAME.Player] = true;
-
-		collTag[(int)TAG_NAME.PlayerBullet, (int)TAG_NAME.Enemy] = true;
-		collTag[(int)TAG_NAME.Enemy, (int)TAG_NAME.PlayerBullet] = true;
-
-		DicTagName.Clear();
-
-		for (int i = 0; i < (int)TAG_NAME.Max; i++)
-		{
-			DicTagName.Add(((TAG_NAME)i).ToString(), (TAG_NAME)i);
-		}
-	}
-
-	public static bool GetColl(string thisObject, string collObject)
-	{
-		TAG_NAME thisNum;
-		TAG_NAME collNum;
-		DicTagName.TryGetValue(thisObject, out thisNum);
-		DicTagName.TryGetValue(collObject, out collNum);
-
-		return collTag[(int)thisNum, (int)collNum];
-	}
-}
 
 public class GameManager : MonoBehaviour
 {
@@ -100,7 +45,7 @@ public class GameManager : MonoBehaviour
 	void Awake()
 	{
 		_instance = this;
-		OnLoad.SetColl();
+		TagCheck.SetColl();
 	}
 
 	Text FPS;

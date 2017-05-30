@@ -83,34 +83,12 @@ public class DefaultBullet : MonoBehaviour
 
 		//이건 해당 문자열이 태그에 들어있는지 판단 ex) EnemyBullet 태그일때 Enemy 혹은 Bullet 중 하나만 가지고 판단이 가능함
 		//문제는 나중에 태그가 더 많아졌을때 의도치 않은 충돌이 일어날 수 있음 
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (TagCheck.GetColl(this.tag, collision.tag))
 		{
-			SpawnParticle(this.transform.position);
+			//SpawnParticle(this.transform.position);
+			//int size = (int)this.transform.localScale.x;
+			ParticleManager.Instance.ParticleCreate(PARTICLE.Bullet, this.transform.position, 0.5f);
 			Destroy(this.transform.gameObject);
 		}
 	}
-
-	public virtual void SpawnParticle(Vector3 ExactPos)
-	{
-		GameObject particle = Instantiate(OnLoad.BulletParticle, ExactPos, Quaternion.identity);
-		ParticleSetting(particle);
-	}
-
-	public virtual void ParticleSetting(GameObject particle)
-	{
-		ParticleSystem.MainModule ps = particle.GetComponent<ParticleSystem>().main;
-		ParticleSystem pe = particle.GetComponent<ParticleSystem>();
-		float size = this.transform.localScale.x;
-		ps.startSize = size;
-		ps.startSpeed = size * 4;
-		ps.startLifetime = (size * 4) / 10.0f;
-		ps.maxParticles = (int)(size * 60.0f);
-		ParticleSystem.Burst[] pb = new ParticleSystem.Burst[1];
-		pb[0].minCount = (short)ps.maxParticles;
-		pb[0].maxCount = (short)ps.maxParticles;
-		pe.emission.SetBursts(pb);
-	}
-
-
-
 }

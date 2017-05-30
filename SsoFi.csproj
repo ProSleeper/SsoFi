@@ -75,7 +75,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ComeOn.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -216,7 +215,6 @@
     <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
     <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
     <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
-    <Compile Include="Assets\TagInit.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Creator\BossBulletCreator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Creator\BulletCreator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Creator\PlayerBulletCreator.cs" />
@@ -240,13 +238,18 @@
     <Compile Include="Assets\_Scripts\Bullet\Generator\SectorGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\ThinTimeGenerator.cs" />
     <Compile Include="Assets\_Scripts\Enemy\BossEnemy.cs" />
+    <Compile Include="Assets\_Scripts\Enemy\ComeOn.cs" />
     <Compile Include="Assets\_Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Enemy\EnemyManager.cs" />
     <Compile Include="Assets\_Scripts\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Item.cs" />
+    <Compile Include="Assets\_Scripts\LoadData.cs" />
     <Compile Include="Assets\_Scripts\ParticleAutoDelete.cs" />
+    <Compile Include="Assets\_Scripts\ParticleManager.cs" />
     <Compile Include="Assets\_Scripts\Player.cs" />
     <Compile Include="Assets\_Scripts\ScoreManager.cs" />
+    <Compile Include="Assets\_Scripts\TagCheck.cs" />
+    <Compile Include="Assets\_Scripts\TagInit.cs" />
     <Compile Include="Assets\_Scripts\WallMethod.cs" />
   </ItemGroup>
   <ItemGroup>

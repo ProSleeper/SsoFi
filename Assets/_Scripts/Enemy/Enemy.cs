@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	const float SPAWN_PERCENT = 3.0f;
-	const int MAXHP = 5;
+	const int MAXHP = 20;
 
 	protected Vector3 PlayerDir;
 	protected float Health;
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour {
 
 	protected virtual void PlayerDirMove()
 	{
-		PlayerDir = OnLoad.Player.transform.position - this.transform.position;
+		PlayerDir = LoadData.Player.transform.position - this.transform.position;
 		PlayerDir.Normalize();
 
 		//플레이어 방향으로 이동
@@ -76,14 +76,15 @@ public class Enemy : MonoBehaviour {
 	{
 		if (RandomItem < SPAWN_PERCENT)
 		{
-			Instantiate(OnLoad.Item, this.transform.position, Quaternion.identity);
+			Instantiate(LoadData.Item, this.transform.position, Quaternion.identity);
 		}
 	}
 
 
 	public virtual void SpawnParticle()
 	{
-		Instantiate(OnLoad.EnemyParticle, this.transform.position, Quaternion.identity);
+		//Instantiate(LoadData.EnemyParticleTriangle, this.transform.position, Quaternion.identity);
+		ParticleManager.Instance.ParticleCreate(PARTICLE.EnemyTriangle, this.transform.position, 0.7f);
 	}
 
 	public virtual void CollisionProcess()
@@ -96,7 +97,7 @@ public class Enemy : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (TagCheck.GetColl(this.tag, collision.tag))
 		{
 			if (collision.gameObject.CompareTag(TAG_NAME.PlayerBullet.ToString()))
 			{

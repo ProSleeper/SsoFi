@@ -20,7 +20,7 @@ public class ThinTimeBullet : DefaultBullet
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (TagCheck.GetColl(this.tag, collision.tag))
 		{
 			SuicideBullet();
 		}
@@ -28,30 +28,14 @@ public class ThinTimeBullet : DefaultBullet
 
 	void SuicideBullet()
 	{
-		GameObject temp = Instantiate(OnLoad.ThinSubBullet, this.transform.position, Quaternion.identity);
+		GameObject temp = Instantiate(LoadData.ThinSubBullet, this.transform.position, Quaternion.identity);
 		temp.GetComponent<SuicideBomb>().EndRadius = BombScope;
 		temp.tag = this.tag;
-		SpawnParticle(this.transform.position);
+		ParticleManager.Instance.ParticleCreate(PARTICLE.ThinBullet, this.transform.position, 2);
 		Destroy(this.transform.gameObject);
 	}
 
-	public override void SpawnParticle(Vector3 ExactPos)
-	{
-		GameObject particle = Instantiate(OnLoad.ThinBulletParticle, ExactPos, Quaternion.identity);
-		ParticleSetting(particle);
-	}
-
-	public override void ParticleSetting(GameObject particle)
-	{
-		ParticleSystem.MainModule ps = particle.GetComponent<ParticleSystem>().main;
-		ParticleSystem pe = particle.GetComponent<ParticleSystem>();
-		ps.startSpeed = BombScope;
-		ps.maxParticles = (int)BombScope * 25;
-		ParticleSystem.Burst[] pb = new ParticleSystem.Burst[1];
-		pb[0].minCount = (short)ps.maxParticles;
-		pb[0].maxCount = (short)ps.maxParticles;
-		pe.emission.SetBursts(pb);
-	}
+	
 
 
 }
