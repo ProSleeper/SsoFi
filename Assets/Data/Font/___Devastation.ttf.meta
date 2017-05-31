@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e02533e7ad47e1344b80cdaed152ff98
+timeCreated: 1496188254
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: ___Devastation
+  fontNames:
+  - ___Devastation
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

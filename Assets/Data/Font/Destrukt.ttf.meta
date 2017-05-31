@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 21437e17f5f97ad4892ddb765822dd1d
+timeCreated: 1496188254
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Destrukt
+  fontNames:
+  - Destrukt
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

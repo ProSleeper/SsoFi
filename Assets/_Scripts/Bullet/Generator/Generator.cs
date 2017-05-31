@@ -12,6 +12,7 @@ public abstract class Generator : MonoBehaviour
 	protected float Curtime;
 	protected GameObject Bullet = null;
 	
+	
 	void Start()
 	{
 		FireSpeed = 0.2f;
@@ -34,6 +35,7 @@ public abstract class Generator : MonoBehaviour
 		temp.GetComponent<DefaultBullet>().BULLETSPEED = MoveSpeed;
 		temp.transform.localScale = BulletSize;
 		temp.tag = this.tag;
+
 		//Instantiate()
 	}
 

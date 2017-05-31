@@ -49,8 +49,9 @@ public class BulletCreater : MonoBehaviour
 			BulletEntity[i].SetActive(false);
 		}
 
-		BulletEntity[(int)BULLET_TYPE.BT_EIGHTDIR].SetActive(true);
-		BulletEntity[(int)BULLET_TYPE.BT_ONEROTATE].SetActive(true);
+		//BulletEntity[(int)BULLET_TYPE.BT_EIGHTDIR].SetActive(true);
+		//BulletEntity[(int)BULLET_TYPE.BT_ONEROTATE].SetActive(true);
+		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].SetActive(true);
 	}
 	
 	//base 보스세팅
@@ -63,7 +64,7 @@ public class BulletCreater : MonoBehaviour
 		BulletEntity[(int)BULLET_TYPE.BT_ONEROTATE].GetComponent<OneRotateGenerator>().BulletSetting(new Vector3(1f, 1f, 1f), 25, 0.0f, 10.5f);
 		BulletEntity[(int)BULLET_TYPE.BT_ORBIT].GetComponent<OrbitGenerator>().BulletSetting(new Vector3(2f, 2f, 2f), 0, 0, 160f, 3.5f);
 		BulletEntity[(int)BULLET_TYPE.BT_SECTOR].GetComponent<SectorGenerator>().BulletSetting(new Vector3(1.2f, 1.2f, 1.2f), 35, 1.0f, 5f);
-		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].GetComponent<ThinTimeGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 0.3f), 10, 1f);
+		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].GetComponent<ThinTimeGenerator>().BulletSetting(new Vector3(1.0f, 1.0f, 1.0f), 35, 1f, 1.2f, 4);
 
 		BulletGeneratorChange(BULLET_TYPE.BT_THINTIME);
 	}

@@ -95,28 +95,29 @@ public class BossEnemy : Enemy
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (TagCheck.GetColl(this.tag, collision.tag))
+		if (OnLoad.GetColl(this.tag, collision.tag))
 		{
-			if (collision.tag.Equals("PlayerBullet"))
+			//수정해야할코드
+			if (collision.tag.Equals("Player"))
 			{
-				//수정해야할코드
-				CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
+				return;
 			}
-			
+			CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
 		}
 	}
 
-	private void OnTriggerStay2D(Collider2D collision)
-	{
-		if (TagCheck.GetColl(this.tag, collision.tag))
-		{
-			if (collision.tag.Equals("PlayerBullet"))
-			{
-				//수정해야할코드
-				CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
-			}
-		}
-	}
+	//private void OnTriggerStay2D(Collider2D collision)
+	//{
+	//	if (OnLoad.GetColl(this.tag, collision.tag))
+	//	{
+	//		if (collision.tag.Equals("Player"))
+	//		{
+	//			return;
+	//		}
+	//		//수정해야할코드
+	//		CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
+	//	}
+	//}
 
 	public override void CollisionProcess()
 	{
@@ -127,7 +128,7 @@ public class BossEnemy : Enemy
 	{
 		Health -= damage;
 		Debug.Log("으악");
-		this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (1.0f / MAXHP) * (Health + 350));
+		this.gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, (1.0f / MAXHP) * (Health + 350));
 		if (Health <= 0)
 		{
 			CollisionProcess();

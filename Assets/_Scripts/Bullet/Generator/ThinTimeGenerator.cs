@@ -16,7 +16,7 @@ public class ThinTimeGenerator : Generator
 	{
 		GameObject temp = Instantiate(Bullet, this.transform.position, Quaternion.identity);
 		temp.GetComponent<ThinTimeBullet>().BULLETSPEED = MoveSpeed;
-		temp.GetComponent<ThinTimeBullet>().BombTime = BTime;
+		temp.GetComponent<ThinTimeBullet>().BombTime = Random.Range(0.6f, BTime);
 		temp.GetComponent<ThinTimeBullet>().BombScope = BScope;
 		temp.transform.localScale = BulletSize;
 		temp.tag = this.tag;

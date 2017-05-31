@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
 	void Restart()
 	{
 		btn.gameObject.SetActive(false);
-		SceneManager.LoadScene(0);
+		SceneManager.LoadScene(2);
 	}
 
 	//화면 밖으로 나가지 않게 하는 코드인데 실제 폰에서 잘 동작하지 않음 수정이 필요!!
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (TagCheck.GetColl(this.tag, collision.tag))
+		if (OnLoad.GetColl(this.tag, collision.tag))
 		{
 			Debug.Log("플레이어 충돌!");
 			btn.gameObject.SetActive(true);

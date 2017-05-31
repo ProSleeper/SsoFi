@@ -238,22 +238,34 @@
     <Compile Include="Assets\_Scripts\Bullet\Generator\SectorGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\ThinTimeGenerator.cs" />
     <Compile Include="Assets\_Scripts\Enemy\BossEnemy.cs" />
-    <Compile Include="Assets\_Scripts\Enemy\ComeOn.cs" />
     <Compile Include="Assets\_Scripts\Enemy\Enemy.cs" />
-    <Compile Include="Assets\_Scripts\Enemy\EnemyManager.cs" />
-    <Compile Include="Assets\_Scripts\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Item.cs" />
-    <Compile Include="Assets\_Scripts\LoadData.cs" />
+    <Compile Include="Assets\_Scripts\Manager\EnemyManager.cs" />
+    <Compile Include="Assets\_Scripts\Manager\GameManager.cs" />
+    <Compile Include="Assets\_Scripts\Manager\ScoreManager.cs" />
     <Compile Include="Assets\_Scripts\ParticleAutoDelete.cs" />
-    <Compile Include="Assets\_Scripts\ParticleManager.cs" />
     <Compile Include="Assets\_Scripts\Player.cs" />
-    <Compile Include="Assets\_Scripts\ScoreManager.cs" />
-    <Compile Include="Assets\_Scripts\TagCheck.cs" />
     <Compile Include="Assets\_Scripts\TagInit.cs" />
+    <Compile Include="Assets\_Scripts\UI\StartButton.cs" />
+    <Compile Include="Assets\_Scripts\UI\Volume.cs" />
     <Compile Include="Assets\_Scripts\WallMethod.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Data\Sound\INFO.txt" />
+    <None Include="Assets\Data\UI\gameicons\Spritesheet\sheet_black1x.xml" />
+    <None Include="Assets\Data\UI\gameicons\Spritesheet\sheet_black2x.xml" />
+    <None Include="Assets\Data\UI\gameicons\Spritesheet\sheet_white1x.xml" />
+    <None Include="Assets\Data\UI\gameicons\Spritesheet\sheet_white2x.xml" />
+    <None Include="Assets\Data\UI\gameicons\license.txt" />
+    <None Include="Assets\Data\UI\onscreencontrols\license.txt" />
+    <None Include="Assets\Data\UI\pixeluipack\License.txt" />
+    <None Include="Assets\Data\UI\pixeluipack\Spritesheet\spritesheetInfo.txt" />
+    <None Include="Assets\Data\UI\uipack_fixed\Spritesheet\blueSheet.xml" />
+    <None Include="Assets\Data\UI\uipack_fixed\Spritesheet\greenSheet.xml" />
+    <None Include="Assets\Data\UI\uipack_fixed\Spritesheet\greySheet.xml" />
+    <None Include="Assets\Data\UI\uipack_fixed\Spritesheet\redSheet.xml" />
+    <None Include="Assets\Data\UI\uipack_fixed\Spritesheet\yellowSheet.xml" />
+    <None Include="Assets\Data\UI\uipack_fixed\license.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
@@ -295,7 +307,6 @@
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
-    <None Include="Assets\onscreencontrols\license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

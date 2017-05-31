@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//최상위 오브젝트의 태그를 검색해서 해당 하위 오브젝트(하위로 내려올땐 계층당 하나만 됨.) 태그를 최상위 태그로 바꿔줌 (재귀)
 public class TagInit : MonoBehaviour
 {
 	void Start ()
