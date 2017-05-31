@@ -9,6 +9,7 @@ public enum BULLET_TYPE
 	BT_BULLET,
 	BT_CHASE,
 	BT_EIGHTDIR,
+	BT_LINE,
 	BT_ONEROTATE,
 	BT_ORBIT,
 	BT_SECTOR,
@@ -52,6 +53,8 @@ public class BulletCreater : MonoBehaviour
 		//BulletEntity[(int)BULLET_TYPE.BT_EIGHTDIR].SetActive(true);
 		//BulletEntity[(int)BULLET_TYPE.BT_ONEROTATE].SetActive(true);
 		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].SetActive(true);
+		BulletEntity[(int)BULLET_TYPE.BT_LINE].SetActive(true);
+
 	}
 	
 	//base 보스세팅
@@ -65,6 +68,7 @@ public class BulletCreater : MonoBehaviour
 		BulletEntity[(int)BULLET_TYPE.BT_ORBIT].GetComponent<OrbitGenerator>().BulletSetting(new Vector3(2f, 2f, 2f), 0, 0, 160f, 3.5f);
 		BulletEntity[(int)BULLET_TYPE.BT_SECTOR].GetComponent<SectorGenerator>().BulletSetting(new Vector3(1.2f, 1.2f, 1.2f), 35, 1.0f, 5f);
 		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].GetComponent<ThinTimeGenerator>().BulletSetting(new Vector3(1.0f, 1.0f, 1.0f), 35, 1f, 1.2f, 4);
+		BulletEntity[(int)BULLET_TYPE.BT_LINE].GetComponent<LineGenerator>().BulletSetting(new Vector3(4f, 1f, 1f), 0, 0, 360f);
 
 		BulletGeneratorChange(BULLET_TYPE.BT_THINTIME);
 	}

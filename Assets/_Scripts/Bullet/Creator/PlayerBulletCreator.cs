@@ -30,7 +30,8 @@ public class PlayerBulletCreator : BulletCreater
 		BulletEntity[(int)BULLET_TYPE.BT_ORBIT].GetComponent<OrbitGenerator>().BulletSetting(new Vector3(1f, 1f, 1f), 0, 0, 160f, 2.5f);
 		BulletEntity[(int)BULLET_TYPE.BT_SECTOR].GetComponent<SectorGenerator>().BulletSetting(new Vector3(0.5f, 0.5f, 0.5f), 35, 1.0f, 5f);
 		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].GetComponent<ThinTimeGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 0.3f), 5, 1f, 0.5f, 2);
+		BulletEntity[(int)BULLET_TYPE.BT_LINE].GetComponent<LineGenerator>().BulletSetting(new Vector3(0.6f, 1f, 1f), 0, 0, 100f);
 
-		BulletGeneratorChange(BULLET_TYPE.BT_BULLET);
+		BulletGeneratorChange(BULLET_TYPE.BT_LINE);
 	}
 }

@@ -102,7 +102,7 @@ public class BossEnemy : Enemy
 			{
 				return;
 			}
-			CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
+			CalculateHealth(collision.GetComponent<DefaultBullet>().BulletPower());
 		}
 	}
 

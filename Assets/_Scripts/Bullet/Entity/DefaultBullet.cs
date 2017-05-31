@@ -21,14 +21,6 @@ public class DefaultBullet : MonoBehaviour
 		}
 	}
 
-	public float BULLETDAMAGE
-	{
-		get
-		{
-			return BulletDamage;
-		}
-	}
-
 	// Use this for initialization
 	void Start()
     {
@@ -37,7 +29,6 @@ public class DefaultBullet : MonoBehaviour
 		{
 			BulletDir = Vector3.up;
 		}
-		BulletDamage = 10;
 	}
 
     // Update is called once per frame
@@ -109,6 +100,12 @@ public class DefaultBullet : MonoBehaviour
 		pb[0].minCount = (short)ps.maxParticles;
 		pb[0].maxCount = (short)ps.maxParticles;
 		pe.emission.SetBursts(pb);
+	}
+
+	public virtual float BulletPower()
+	{
+		BulletDamage = 10;
+		return BulletDamage;
 	}
 
 

@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour {
 			{
 				//이 부분은 생각을 해봐야 할듯..
 				//일단 통일이 가능하게 하려면 체력 스크립트를 따로 짜야된다는 생각.
-				CalculateHealth(collision.GetComponent<DefaultBullet>().BULLETDAMAGE);
+				CalculateHealth(collision.GetComponent<DefaultBullet>().BulletPower());
 			}
 		}
 	}

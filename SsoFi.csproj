@@ -18,7 +18,7 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
+    <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -223,6 +223,7 @@
     <Compile Include="Assets\_Scripts\Bullet\Entity\ChaseBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\DefaultBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\EightDirBullet.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Entity\LineBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\OneRotateBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\OrbitBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\SectorBullet.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="Assets\_Scripts\Bullet\Generator\ChaserGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\EightGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\Generator.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Generator\LineGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\OneRotateGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\OrbitGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\SectorGenerator.cs" />

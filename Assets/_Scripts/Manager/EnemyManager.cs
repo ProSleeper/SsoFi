@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour
 		OnLoad.OnEnemyDataLoad();
 	}
 
-	const int MaxDeathCount = 10;
+	const int MaxDeathCount = 5;
 
 	List<GameObject> EnemyList = new List<GameObject>();
 
