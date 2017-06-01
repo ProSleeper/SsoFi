@@ -9,6 +9,7 @@ public enum BULLET_TYPE
 	BT_BULLET,
 	BT_CHASE,
 	BT_EIGHTDIR,
+	BT_FASTTHIN,
 	BT_LINE,
 	BT_ONEROTATE,
 	BT_ORBIT,
@@ -71,7 +72,8 @@ public class BulletCreater : MonoBehaviour
 		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].GetComponent<ThinTimeGenerator>().BulletSetting(new Vector3(1.0f, 1.0f, 1.0f), 35, 1f, 1.0f, 4);
 		BulletEntity[(int)BULLET_TYPE.BT_LINE].GetComponent<LineGenerator>().BulletSetting(new Vector3(4f, 1f, 1f), 0, 0, 200f);
 		BulletEntity[(int)BULLET_TYPE.BT_RECTANGLE].GetComponent<RectangleGenerator>().BulletSetting(new Vector3(9f, 7f, 1f), 25, 1.5f);
+		BulletEntity[(int)BULLET_TYPE.BT_FASTTHIN].GetComponent<FastThinGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 1f), 45, 0.01f);
 
-		BulletGeneratorChange(BULLET_TYPE.BT_RECTANGLE);
+		BulletGeneratorChange(BULLET_TYPE.BT_FASTTHIN);
 	}
 }

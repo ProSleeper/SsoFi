@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	const float SPAWN_PERCENT = 3.0f;
-	const int MAXHP = 5;
+	const int MAXHP = 20;
 
 	protected Vector3 PlayerDir;
 	protected float Health;
