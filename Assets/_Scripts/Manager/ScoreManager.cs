@@ -2,35 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour {
 
-	static ScoreManager instance = null;
-
-	public static ScoreManager Instance
-	{
-		get
-		{
-			if (instance == null)
-				Debug.LogError("ScoreManager == null");
-			return instance;
-		}
-	}
-
-	private void Awake()
-	{
-		instance = this;
-	}
-
+//이 매니저는 삭제하고 게임매니저로 통합!
+public class ScoreManager : MonoSingleton<ScoreManager>
+{
 	[HideInInspector]
 	public int Score;
 	UILabel ScoreText;
 	UILabel DeadCountText;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		Score = 0;
 		ScoreText = GameObject.Find("Score").GetComponentInChildren<UILabel>();
-		ScoreText.text = "Score: 0";
+		if (ScoreText != null)
+		{
+			ScoreText.text = "Score: 0";
+		}
 	}
 
 	public void AddScore()

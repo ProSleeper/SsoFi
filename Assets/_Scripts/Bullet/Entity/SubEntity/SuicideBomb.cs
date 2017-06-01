@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SuicideBomb : MonoBehaviour
+public class SuicideBomb : DefaultBullet
 {
 
 	float dTime;
@@ -27,5 +27,10 @@ public class SuicideBomb : MonoBehaviour
 		{
 			Destroy(this.gameObject);
 		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		
 	}
 }

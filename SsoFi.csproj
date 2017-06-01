@@ -18,7 +18,7 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion>4</LangVersion>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -226,6 +226,7 @@
     <Compile Include="Assets\_Scripts\Bullet\Entity\LineBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\OneRotateBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\OrbitBullet.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Entity\RectangleBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\SectorBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\SubEntity\SuicideBomb.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\ThinTimeBullet.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Assets\_Scripts\Bullet\Generator\LineGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\OneRotateGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\OrbitGenerator.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Generator\RectangleGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\SectorGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\ThinTimeGenerator.cs" />
     <Compile Include="Assets\_Scripts\Enemy\BossEnemy.cs" />
@@ -244,7 +246,9 @@
     <Compile Include="Assets\_Scripts\Item.cs" />
     <Compile Include="Assets\_Scripts\Manager\EnemyManager.cs" />
     <Compile Include="Assets\_Scripts\Manager\GameManager.cs" />
+    <Compile Include="Assets\_Scripts\Manager\ResultManager.cs" />
     <Compile Include="Assets\_Scripts\Manager\ScoreManager.cs" />
+    <Compile Include="Assets\_Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\_Scripts\ParticleAutoDelete.cs" />
     <Compile Include="Assets\_Scripts\Player.cs" />
     <Compile Include="Assets\_Scripts\TagInit.cs" />

@@ -13,6 +13,7 @@ public class LineGenerator : OneRotateGenerator
 		Bullet = Resources.Load("Prefabs/Bullet/Entity/LineBullet") as GameObject;
 		Line = Instantiate(Bullet);
 		Line.transform.parent = this.transform;
+		
 	}
 	private void Start()
 	{

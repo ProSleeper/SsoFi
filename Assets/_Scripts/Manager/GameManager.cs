@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public enum STAGE_PHASE
@@ -116,23 +117,24 @@ public class GameManager : MonoBehaviour
 		FPS = GameObject.Find("FPS").GetComponent<Text>();
 		em = this.GetComponent<EnemyManager>();
 		Invoke("CommonStage", 3);
+		CurPhase = STAGE_PHASE.Ready;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		CurTime += Time.deltaTime;
-		if (CurTime > 1.0f)
-		{
-			FPS.text = "FPS : " + FPSCount.ToString();
-			FPSCount = 0;
-			CurTime = 0;
+		//CurTime += Time.deltaTime;
+		//if (CurTime > 1.0f)
+		//{
+		//	FPS.text = "FPS : " + FPSCount.ToString();
+		//	FPSCount = 0;
+		//	CurTime = 0;
 			
-		}
-		else
-		{
-			FPSCount++;
-		}
+		//}
+		//else
+		//{
+		//	FPSCount++;
+		//}
 	}
 
 	void CommonStage()
@@ -148,8 +150,9 @@ public class GameManager : MonoBehaviour
 		//em.BossSpawn();
 	}
 
-	void StageGameOver()
+	public void StageGameOver()
 	{
-		//CurPhase = STAGE_PHASE.GamaOver;
+		CurPhase = STAGE_PHASE.GamaOver;
+		SceneManager.LoadScene(2);
 	}
 }

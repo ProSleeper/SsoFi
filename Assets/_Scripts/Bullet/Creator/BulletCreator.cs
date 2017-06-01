@@ -12,6 +12,7 @@ public enum BULLET_TYPE
 	BT_LINE,
 	BT_ONEROTATE,
 	BT_ORBIT,
+	BT_RECTANGLE,
 	BT_SECTOR,
 	BT_THINTIME,
 	BT_MAX
@@ -52,7 +53,7 @@ public class BulletCreater : MonoBehaviour
 
 		//BulletEntity[(int)BULLET_TYPE.BT_EIGHTDIR].SetActive(true);
 		//BulletEntity[(int)BULLET_TYPE.BT_ONEROTATE].SetActive(true);
-		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].SetActive(true);
+		BulletEntity[(int)BULLET_TYPE.BT_RECTANGLE].SetActive(true);
 		BulletEntity[(int)BULLET_TYPE.BT_LINE].SetActive(true);
 
 	}
@@ -67,9 +68,10 @@ public class BulletCreater : MonoBehaviour
 		BulletEntity[(int)BULLET_TYPE.BT_ONEROTATE].GetComponent<OneRotateGenerator>().BulletSetting(new Vector3(1f, 1f, 1f), 25, 0.0f, 10.5f);
 		BulletEntity[(int)BULLET_TYPE.BT_ORBIT].GetComponent<OrbitGenerator>().BulletSetting(new Vector3(2f, 2f, 2f), 0, 0, 160f, 3.5f);
 		BulletEntity[(int)BULLET_TYPE.BT_SECTOR].GetComponent<SectorGenerator>().BulletSetting(new Vector3(1.2f, 1.2f, 1.2f), 35, 1.0f, 5f);
-		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].GetComponent<ThinTimeGenerator>().BulletSetting(new Vector3(1.0f, 1.0f, 1.0f), 35, 1f, 1.2f, 4);
-		BulletEntity[(int)BULLET_TYPE.BT_LINE].GetComponent<LineGenerator>().BulletSetting(new Vector3(4f, 1f, 1f), 0, 0, 360f);
+		BulletEntity[(int)BULLET_TYPE.BT_THINTIME].GetComponent<ThinTimeGenerator>().BulletSetting(new Vector3(1.0f, 1.0f, 1.0f), 35, 1f, 1.0f, 4);
+		BulletEntity[(int)BULLET_TYPE.BT_LINE].GetComponent<LineGenerator>().BulletSetting(new Vector3(4f, 1f, 1f), 0, 0, 200f);
+		BulletEntity[(int)BULLET_TYPE.BT_RECTANGLE].GetComponent<RectangleGenerator>().BulletSetting(new Vector3(9f, 7f, 1f), 25, 1.5f);
 
-		BulletGeneratorChange(BULLET_TYPE.BT_THINTIME);
+		BulletGeneratorChange(BULLET_TYPE.BT_RECTANGLE);
 	}
 }

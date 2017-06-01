@@ -37,7 +37,7 @@ public class DefaultBullet : MonoBehaviour
 		EnemyChase();
 	}
 
-	public void EnemyChase()
+	public virtual void EnemyChase()
 	{
 		BulletDir.Normalize();
 		this.transform.position += BulletDir * BulletSpeed * Time.deltaTime;
@@ -91,7 +91,7 @@ public class DefaultBullet : MonoBehaviour
 	{
 		ParticleSystem.MainModule ps = particle.GetComponent<ParticleSystem>().main;
 		ParticleSystem pe = particle.GetComponent<ParticleSystem>();
-		float size = this.transform.localScale.x;
+		float size = this.transform.localScale.z;
 		ps.startSize = size;
 		ps.startSpeed = size * 4;
 		ps.startLifetime = (size * 4) / 10.0f;

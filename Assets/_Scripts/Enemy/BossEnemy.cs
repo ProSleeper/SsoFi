@@ -131,6 +131,8 @@ public class BossEnemy : Enemy
 		this.gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, (1.0f / MAXHP) * (Health + 350));
 		if (Health <= 0)
 		{
+			EnemyManager.Instance.RemoveAllEnemy();
+			GameManager.Instance.StageGameOver();
 			CollisionProcess();
 		}
 	}

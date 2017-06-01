@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour
 		OnLoad.OnEnemyDataLoad();
 	}
 
-	const int MaxDeathCount = 5;
+	const int MaxDeathCount = 500;
 
 	List<GameObject> EnemyList = new List<GameObject>();
 
@@ -109,8 +109,6 @@ public class EnemyManager : MonoBehaviour
 
 	public void RemoveAllEnemy()
 	{
-
-
 		//하위 자식 전부 삭제 코드 1
 		//GameObject[] temp = new GameObject[this.transform.childCount];
 		//for (int i = 0; i < this.transform.childCount; i++)
