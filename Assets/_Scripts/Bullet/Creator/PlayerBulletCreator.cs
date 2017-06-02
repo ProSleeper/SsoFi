@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBulletCreator : BulletCreater
 {
+
+	float dtime = 0;
+
 	public override string TagSetting()
 	{
 		return TAG_NAME.PlayerBullet.ToString();
@@ -34,6 +36,18 @@ public class PlayerBulletCreator : BulletCreater
 		BulletEntity[(int)BULLET_TYPE.BT_RECTANGLE].GetComponent<RectangleGenerator>().BulletSetting(new Vector3(5f, 4f, 1f), 8, 5.0f);
 		BulletEntity[(int)BULLET_TYPE.BT_FASTTHIN].GetComponent<FastThinGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 0.5f), 40, 0.1f);
 
-		BulletGeneratorChange(BULLET_TYPE.BT_FASTTHIN);
+		BulletGeneratorChange(BULLET_TYPE.BT_CHASE);
 	}
+
+
+
+	//private void Update()
+	//{
+	//	dtime += Time.deltaTime;
+	//	if (dtime > 3f)
+	//	{
+	//		BulletGeneratorChange((BULLET_TYPE)(Random.Range(0, (int)BULLET_TYPE.BT_MAX)));
+	//		dtime = 0;
+	//	}
+	//}
 }

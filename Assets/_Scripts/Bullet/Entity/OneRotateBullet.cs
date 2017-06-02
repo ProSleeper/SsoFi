@@ -16,4 +16,10 @@ public class OneRotateBullet : DefaultBullet
 	{
 		
 	}
+
+	public override float BulletPower()
+	{
+		BulletDamage = 20;
+		return BulletDamage;
+	}
 }

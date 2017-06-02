@@ -17,7 +17,7 @@ public class LineBullet : BigBullet
 
 		//이건 해당 문자열이 태그에 들어있는지 판단 ex) EnemyBullet 태그일때 Enemy 혹은 Bullet 중 하나만 가지고 판단이 가능함
 		//문제는 나중에 태그가 더 많아졌을때 의도치 않은 충돌이 일어날 수 있음 
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (CollTag.GetColl(this.tag, collision.tag))
 		{
 			Vector3 distance = collision.transform.position - this.transform.position;
 			float aa = collision.transform.GetComponent<CircleCollider2D>().radius * collision.transform.localScale.x;
@@ -26,5 +26,11 @@ public class LineBullet : BigBullet
 			SpawnParticle(this.transform.position + distance + reverseDistance);
 			//Destroy(this.transform.gameObject);
 		}
+	}
+
+	public override float BulletPower()
+	{
+		BulletDamage = 15;
+		return BulletDamage;
 	}
 }

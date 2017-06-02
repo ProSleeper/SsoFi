@@ -37,10 +37,16 @@ public class RectangleBullet : DefaultBullet
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (CollTag.GetColl(this.tag, collision.tag))
 		{
 			SpawnParticle(this.transform.position);
 			Debug.Log("직사각형충돌");
 		}
+	}
+
+	public override float BulletPower()
+	{
+		BulletDamage = 25;
+		return BulletDamage;
 	}
 }

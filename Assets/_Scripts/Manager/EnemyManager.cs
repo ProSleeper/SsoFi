@@ -19,10 +19,9 @@ public class EnemyManager : MonoBehaviour
 	void Awake()
     {
         _instance = this;
-		OnLoad.OnEnemyDataLoad();
 	}
 
-	const int MaxDeathCount = 500;
+	const int MaxDeathCount = ConstStageValue.CommonEnemyCount;
 
 	List<GameObject> EnemyList = new List<GameObject>();
 
@@ -66,7 +65,7 @@ public class EnemyManager : MonoBehaviour
 		SpawnPos = Camera.main.ScreenToWorldPoint(SpawnPos);
 		SpawnPos.z = 0;
 
-		if (Mathf.Abs((OnLoad.Player.transform.position - SpawnPos).magnitude) < 6.0f) 
+		if (Mathf.Abs((LoadData.Player.transform.position - SpawnPos).magnitude) < 6.0f) 
 		{
 			return;
 		}
@@ -95,7 +94,6 @@ public class EnemyManager : MonoBehaviour
 	public void OnDeath(GameObject RemoveEnemy)
 	{
 		DeathCount++;
-		ScoreManager.Instance.AddScore();
 		DeadCountText.text = DeathCount.ToString() + " / " + MaxDeathCount.ToString();
 
 		EnemyList.Remove(RemoveEnemy);
@@ -105,6 +103,13 @@ public class EnemyManager : MonoBehaviour
 			StopSpawn();
 			BossSpawn();
 		}
+	}
+
+	//여기가 분기점
+	public void BossDead()
+	{
+		ScoreManager.Instance.SetCurTime();
+		GameManager.Instance.GameClear();
 	}
 
 	public void RemoveAllEnemy()

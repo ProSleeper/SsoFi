@@ -18,7 +18,7 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion>4</LangVersion>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -244,9 +244,13 @@
     <Compile Include="Assets\_Scripts\Bullet\Generator\RectangleGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\SectorGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\ThinTimeGenerator.cs" />
+    <Compile Include="Assets\_Scripts\CollTag.cs" />
+    <Compile Include="Assets\_Scripts\ConstStageValue.cs" />
     <Compile Include="Assets\_Scripts\Enemy\BossEnemy.cs" />
     <Compile Include="Assets\_Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\_Scripts\FPSCheck.cs" />
     <Compile Include="Assets\_Scripts\Item.cs" />
+    <Compile Include="Assets\_Scripts\LoadData.cs" />
     <Compile Include="Assets\_Scripts\Manager\EnemyManager.cs" />
     <Compile Include="Assets\_Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Manager\ResultManager.cs" />

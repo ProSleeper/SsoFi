@@ -33,4 +33,10 @@ public class SuicideBomb : DefaultBullet
 	{
 		
 	}
+
+	public override float BulletPower()
+	{
+		BulletDamage = 10;
+		return BulletDamage;
+	}
 }

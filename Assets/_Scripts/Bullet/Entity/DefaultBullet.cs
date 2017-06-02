@@ -74,7 +74,7 @@ public class DefaultBullet : MonoBehaviour
 
 		//이건 해당 문자열이 태그에 들어있는지 판단 ex) EnemyBullet 태그일때 Enemy 혹은 Bullet 중 하나만 가지고 판단이 가능함
 		//문제는 나중에 태그가 더 많아졌을때 의도치 않은 충돌이 일어날 수 있음 
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (CollTag.GetColl(this.tag, collision.tag))
 		{
 			SpawnParticle(this.transform.position);
 			Destroy(this.transform.gameObject);
@@ -83,7 +83,7 @@ public class DefaultBullet : MonoBehaviour
 
 	public virtual void SpawnParticle(Vector3 ExactPos)
 	{
-		GameObject particle = Instantiate(OnLoad.BulletParticle, ExactPos, Quaternion.identity);
+		GameObject particle = Instantiate(LoadData.BulletParticle, ExactPos, Quaternion.identity);
 		ParticleSetting(particle);
 	}
 

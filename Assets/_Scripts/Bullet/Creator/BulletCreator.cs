@@ -52,10 +52,10 @@ public class BulletCreater : MonoBehaviour
 			BulletEntity[i].SetActive(false);
 		}
 
-		//BulletEntity[(int)BULLET_TYPE.BT_EIGHTDIR].SetActive(true);
-		//BulletEntity[(int)BULLET_TYPE.BT_ONEROTATE].SetActive(true);
+		BulletEntity[(int)BULLET_TYPE.BT_EIGHTDIR].SetActive(true);
+		BulletEntity[(int)BULLET_TYPE.BT_ONEROTATE].SetActive(true);
 		BulletEntity[(int)BULLET_TYPE.BT_RECTANGLE].SetActive(true);
-		BulletEntity[(int)BULLET_TYPE.BT_LINE].SetActive(true);
+		//BulletEntity[(int)BULLET_TYPE.BT_LINE].SetActive(true);
 
 	}
 	

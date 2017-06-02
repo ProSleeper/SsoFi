@@ -1,11 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ResultManager : MonoSingleton<ResultManager>
+public class ResultManager : MonoBehaviour
 {
+	private static ResultManager _instance = null;
+
+	public static ResultManager Instance
+	{
+		get
+		{
+			if (_instance == null)
+				Debug.LogError("EnemyManager == null");
+			return _instance;
+		}
+	}
+
+	GameObject ResultPanel;
+	GameObject Best;
+	GameObject Current;
+
 	UIButton ToHome;
 	UIButton ToStage;
 	UIButton ReStart;
@@ -15,26 +32,54 @@ public class ResultManager : MonoSingleton<ResultManager>
 	UILabel CurrScore;
 	UILabel CurrTime;
 
-	void Start () 
+	private void Awake()
 	{
-		ToHome = GameObject.Find("ToHomeButton").GetComponent<UIButton>();
-		ToStage = GameObject.Find("ToStageButton").GetComponent<UIButton>();
-		ReStart = GameObject.Find("ReStartButton").GetComponent<UIButton>();
+		_instance = this;
+		ResultPanel = GameObject.Find("Camera").transform.FindChild("ResultPanel").gameObject;
+		Best = ResultPanel.transform.FindChild("BestResult").gameObject;
+		Current = ResultPanel.transform.FindChild("CurrentResult").gameObject;
 
-		BestScore = GameObject.Find("BestResult").transform.FindChild("Score").GetComponent<UILabel>();
-		BestTime = GameObject.Find("BestResult").transform.FindChild("Time").GetComponent<UILabel>();
-		CurrScore = GameObject.Find("CurrentResult").transform.FindChild("Score").GetComponent<UILabel>();
-		CurrTime = GameObject.Find("CurrentResult").transform.FindChild("Time").GetComponent<UILabel>();
-		SetResult();
+		ToHome = ResultPanel.transform.FindChild("ToHomeButton").GetComponent<UIButton>();
+		ToStage = ResultPanel.transform.FindChild("ToStageButton").GetComponent<UIButton>();
+		ReStart = ResultPanel.transform.FindChild("ReStartButton").GetComponent<UIButton>();
+
+		BestScore = Best.transform.FindChild("Score").GetComponent<UILabel>();
+		BestTime = Best.transform.FindChild("Time").GetComponent<UILabel>();
+		CurrScore = Current.transform.FindChild("Score").GetComponent<UILabel>();
+		CurrTime = Current.transform.FindChild("Time").GetComponent<UILabel>();
+		Debug.Log("리절트 매니저 어웨이크");
+	}
+
+	void Start ()
+	{
 		SetButton();
 	}
 
 
-	void SetResult()
+	public void ClearResult()
 	{
-		CurrScore.text = "Score : " + ScoreManager.Instance.Score.ToString();
-		CurrTime.text = "Time : " + ScoreManager.Instance.Score.ToString();
+		ResultPanel.SetActive(true);
 
+		BestScore.text = "Score : " + ScoreManager.Instance.GetBestScore().ToString();
+
+		float bt = ScoreManager.Instance.GetBestTime();
+
+		BestTime.text = "Time : " + Math.Round(bt, 1).ToString();
+		CurrScore.text = "Score : " + ScoreManager.Instance.GetCurScore().ToString();
+
+		float ct = ScoreManager.Instance.GetCurTime();
+		CurrTime.text = "Time : " + Math.Round(ct, 1).ToString();
+	}
+
+	public void OverResult()
+	{
+		ResultPanel.SetActive(true);
+
+		BestScore.text = "Score : " + ScoreManager.Instance.GetBestOverScore().ToString();
+		float bt = ScoreManager.Instance.GetBestOverTime();
+		BestTime.text = "Time : " + Math.Round(bt, 1).ToString();
+		CurrScore.text = "Score : " + 0;
+		CurrTime.text = "Time : " + 0;
 	}
 
 	void SetButton()

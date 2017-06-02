@@ -15,7 +15,7 @@ public class BossEnemy : Enemy
 	const float CHANGETIME = 5f;
 	const float MOVETIME = 2f;
 	const int MOVEPOINT = 3;
-	const int MAXHP = 700;
+	const int MAXHP = ConstStageValue.BossHealth;
 
 	float ChangeTransTime;
 	
@@ -95,7 +95,7 @@ public class BossEnemy : Enemy
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (CollTag.GetColl(this.tag, collision.tag))
 		{
 			//수정해야할코드
 			if (collision.tag.Equals("Player"))
@@ -128,11 +128,13 @@ public class BossEnemy : Enemy
 	{
 		Health -= damage;
 		Debug.Log("으악");
-		this.gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, (1.0f / MAXHP) * (Health + 350));
+		this.gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, (1.0f / MAXHP) * (Health + (MAXHP / 2)));
 		if (Health <= 0)
 		{
-			EnemyManager.Instance.RemoveAllEnemy();
-			GameManager.Instance.StageGameOver();
+			EnemyManager.Instance.BossDead();
+
+			//EnemyManager.Instance.StopSpawn();
+			//GameManager.Instance.GameOver();
 			CollisionProcess();
 		}
 	}

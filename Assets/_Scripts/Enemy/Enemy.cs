@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour {
 	protected Vector3 PlayerDir;
 	protected float Health;
 	protected float ChaseSpeed;
+	protected int OwnScore;
 
 	float RandomItem;
 
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour {
 		RandomItem = Random.Range(0, 10000.0f) / 100.0f;
 		this.gameObject.tag = TAG_NAME.Enemy.ToString();
 		Health = MAXHP;
+		SetOwnScore();
 	}
 	
 	void Update()
@@ -45,7 +47,7 @@ public class Enemy : MonoBehaviour {
 
 	protected virtual void PlayerDirMove()
 	{
-		PlayerDir = OnLoad.Player.transform.position - this.transform.position;
+		PlayerDir = LoadData.Player.transform.position - this.transform.position;
 		PlayerDir.Normalize();
 
 		//플레이어 방향으로 이동
@@ -76,14 +78,14 @@ public class Enemy : MonoBehaviour {
 	{
 		if (RandomItem < SPAWN_PERCENT)
 		{
-			Instantiate(OnLoad.Item, this.transform.position, Quaternion.identity);
+			Instantiate(LoadData.Item, this.transform.position, Quaternion.identity);
 		}
 	}
 
 
 	public virtual void SpawnParticle()
 	{
-		Instantiate(OnLoad.EnemyParticle, this.transform.position, Quaternion.identity);
+		Instantiate(LoadData.EnemyParticle, this.transform.position, Quaternion.identity);
 	}
 
 	public virtual void CollisionProcess()
@@ -91,12 +93,14 @@ public class Enemy : MonoBehaviour {
 		SpawnParticle();
 		SpawnItem();
 		EnemyManager.Instance.OnDeath(this.gameObject);
+		ScoreManager.Instance.AddScore(OwnScore);
+
 		Destroy(this.gameObject);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (CollTag.GetColl(this.tag, collision.tag))
 		{
 			if (collision.gameObject.CompareTag(TAG_NAME.PlayerBullet.ToString()))
 			{
@@ -114,6 +118,11 @@ public class Enemy : MonoBehaviour {
 		{
 			CollisionProcess();
 		}
+	}
+
+	protected virtual void SetOwnScore()
+	{
+		OwnScore = 10;
 	}
 
 }

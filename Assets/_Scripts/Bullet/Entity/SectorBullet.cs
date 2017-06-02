@@ -17,4 +17,10 @@ public class SectorBullet : DefaultBullet
 		
 	}
 
+	public override float BulletPower()
+	{
+		BulletDamage = 30;
+		return BulletDamage;
+	}
+
 }

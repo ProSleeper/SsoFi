@@ -9,4 +9,10 @@ public class OrbitBullet : BigBullet
 	void Update () {
 		
 	}
+
+	public override float BulletPower()
+	{
+		BulletDamage = 15;
+		return BulletDamage;
+	}
 }

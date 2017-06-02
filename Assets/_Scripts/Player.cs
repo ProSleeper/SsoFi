@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -10,12 +9,13 @@ public class Player : MonoBehaviour
 	Vector3 MouseClickPos;
 	Vector3 Distance;
 
-	public Button btn;
+	public GameObject btn;
 	
 	void Start()
 	{
-		btn.onClick.AddListener(Restart);
-		btn.gameObject.SetActive(false);
+		//btn = GameObject.Find("Result");
+		//btn.GetComponentInChildren<UIButton>().onClick.Add(new EventDelegate(Restart));
+		//btn.gameObject.SetActive(false);
 		this.gameObject.tag = TAG_NAME.Player.ToString();
 	}
 
@@ -49,12 +49,12 @@ public class Player : MonoBehaviour
 		ScreenLock();
 		
 	}
-	
-	void Restart()
-	{
-		btn.gameObject.SetActive(false);
-		SceneManager.LoadScene(2);
-	}
+
+	//void Restart()
+	//{
+	//	EnemyManager.Instance.StopSpawn();
+	//	SceneManager.LoadScene(1);
+	//}
 
 	//화면 밖으로 나가지 않게 하는 코드인데 실제 폰에서 잘 동작하지 않음 수정이 필요!!
 	void ScreenLock()
@@ -85,10 +85,12 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (OnLoad.GetColl(this.tag, collision.tag))
+		if (CollTag.GetColl(this.tag, collision.tag))
 		{
 			Debug.Log("플레이어 충돌!");
-			btn.gameObject.SetActive(true);
+			EnemyManager.Instance.StopSpawn();
+			GameManager.Instance.GameOver();
+			//Destroy(this.gameObject);
 		}
 	}
 }
