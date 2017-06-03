@@ -15,7 +15,7 @@ public class OneRotateGenerator : Generator
 		Bullet = Resources.Load("Prefabs/Bullet/Entity/OneBulletRotate") as GameObject;
 	}
 
-	public override void FireMissile()
+	public override void FireBullet()
 	{
 		GameObject spawn_bullet = Instantiate(Bullet, this.gameObject.transform.position, Quaternion.identity) as GameObject;
 		spawn_bullet.transform.localScale = BulletSize;

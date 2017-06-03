@@ -10,7 +10,7 @@ public class SectorGenerator : OneRotateGenerator
 		Bullet = Resources.Load("Prefabs/Bullet/Entity/SectorBullet") as GameObject;
 	}
 
-	public override void FireMissile()
+	public override void FireBullet()
 	{
 		Vector3 temp = (Vector3.zero - this.transform.position).normalized;
 		if (Vector3.Distance(Vector3.zero, this.transform.position) < 1.0f)

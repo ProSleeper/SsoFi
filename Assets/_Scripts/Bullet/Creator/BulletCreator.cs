@@ -11,9 +11,11 @@ public enum BULLET_TYPE
 	BT_EIGHTDIR,
 	BT_FASTTHIN,
 	BT_LINE,
+	BT_METEOR,
 	BT_ONEROTATE,
 	BT_ORBIT,
 	BT_RECTANGLE,
+    BT_REMAIN,
 	BT_SECTOR,
 	BT_THINTIME,
 	BT_MAX
@@ -52,16 +54,18 @@ public class BulletCreater : MonoBehaviour
 			BulletEntity[i].SetActive(false);
 		}
 
-		BulletEntity[(int)BULLET_TYPE.BT_EIGHTDIR].SetActive(true);
 		BulletEntity[(int)BULLET_TYPE.BT_ONEROTATE].SetActive(true);
-		BulletEntity[(int)BULLET_TYPE.BT_RECTANGLE].SetActive(true);
+		BulletEntity[(int)BULLET_TYPE.BT_BIG].SetActive(true);
+		//BulletEntity[(int)BULLET_TYPE.BT_RECTANGLE].SetActive(true);
 		//BulletEntity[(int)BULLET_TYPE.BT_LINE].SetActive(true);
-
 	}
 	
 	//base 보스세팅
 	public virtual void GeneratorSetting()
 	{
+        //제네레이터들이 결국 기본 제네레이터를 상속받은 상태이기 때문에 나중에 json으로 파싱한다면
+        //반복문으로 돌면서 Generator에서의 BulletSetting 세팅해주면 됨. 왜냐면 BulletSetting이 가상함수이기 때문에
+        //지금은 어차피 값들을 다 일일히 세팅해줘서 반복문에서 도는게 의미가 없음
 		BulletEntity[(int)BULLET_TYPE.BT_BIG].GetComponent<BigGenerator>().BulletSetting(new Vector3(2f, 2f, 2f), 40, 1.5f);
 		BulletEntity[(int)BULLET_TYPE.BT_BULLET].GetComponent<BulletGenerator>().BulletSetting(new Vector3(1f, 1f, 1f), 30, 0.2f);
 		BulletEntity[(int)BULLET_TYPE.BT_CHASE].GetComponent<ChaserGenerator>().BulletSetting(new Vector3(0.5f, 0.5f, 0.5f), 10, 0.25f);
@@ -73,6 +77,9 @@ public class BulletCreater : MonoBehaviour
 		BulletEntity[(int)BULLET_TYPE.BT_LINE].GetComponent<LineGenerator>().BulletSetting(new Vector3(4f, 1f, 1f), 0, 0, 200f);
 		BulletEntity[(int)BULLET_TYPE.BT_RECTANGLE].GetComponent<RectangleGenerator>().BulletSetting(new Vector3(9f, 7f, 1f), 25, 1.5f);
 		BulletEntity[(int)BULLET_TYPE.BT_FASTTHIN].GetComponent<FastThinGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 1f), 45, 0.01f);
+        BulletEntity[(int)BULLET_TYPE.BT_REMAIN].GetComponent<RemainGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 0.5f), 40, 0.1f);
+		BulletEntity[(int)BULLET_TYPE.BT_METEOR].GetComponent<MeteorGenerator>().BulletSetting(new Vector3(1f, 1f, 1f), 0, 3f);
+
 
 		BulletGeneratorChange(BULLET_TYPE.BT_FASTTHIN);
 	}

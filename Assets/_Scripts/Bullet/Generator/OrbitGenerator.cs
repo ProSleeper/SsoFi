@@ -21,7 +21,7 @@ public class OrbitGenerator : OneRotateGenerator
 		Orbit.transform.GetChild(0).transform.localPosition = new Vector3(IntervalFromCenter, 0, 0);
 	}
 
-	public override void FireMissile()
+	public override void FireBullet()
 	{
 		//플레이어 -> 제너레이터 -> 랩핑 -> 실제 미사일 계층으로 되어있는데 포지션 오류가 났던 이유는
 		//위치 초기화를 하려면 이것들을 순차적으로 초기화해줘야 제대로 초기화가 된다.

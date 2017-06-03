@@ -20,7 +20,7 @@ public class LineGenerator : OneRotateGenerator
 		Line.transform.localScale = new Vector3(BulletSize.x, Line.transform.localScale.y, Line.transform.localScale.z);
 	}
 
-	public override void FireMissile()
+	public override void FireBullet()
 	{
 		//플레이어 -> 제너레이터 -> 랩핑 -> 실제 미사일 계층으로 되어있는데 포지션 오류가 났던 이유는
 		//위치 초기화를 하려면 이것들을 순차적으로 초기화해줘야 제대로 초기화가 된다.

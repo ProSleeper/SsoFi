@@ -24,19 +24,17 @@ public abstract class Generator : MonoBehaviour
 		Curtime += Time.deltaTime;
 		if (Curtime > FireSpeed)
 		{
-			FireMissile();
+			FireBullet();
 			Curtime = 0;
 		}
 	}
 
-	public virtual void FireMissile()
+	public virtual void FireBullet()
 	{
 		GameObject temp = Instantiate(Bullet, this.transform.position, Quaternion.identity);
 		temp.GetComponent<DefaultBullet>().BULLETSPEED = MoveSpeed;
 		temp.transform.localScale = BulletSize;
 		temp.tag = this.tag;
-
-		//Instantiate()
 	}
 
 	public virtual void BulletSetting(Vector3 bulletSize, float moveSpeed, float fireSpeed)

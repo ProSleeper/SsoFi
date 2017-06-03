@@ -10,7 +10,7 @@ public class ChaserGenerator : Generator
 		
 	}
 	
-	public override void FireMissile()
+	public override void FireBullet()
 	{
 		GameObject temp = Instantiate(Bullet, this.gameObject.transform.position, Quaternion.identity);
 		temp.GetComponent<DefaultBullet>().BULLETSPEED = MoveSpeed;

@@ -18,7 +18,7 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
+    <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -226,9 +226,11 @@
     <Compile Include="Assets\_Scripts\Bullet\Entity\EightDirBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\FastThinBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\LineBullet.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Entity\MeteorBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\OneRotateBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\OrbitBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\RectangleBullet.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Entity\RemainBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\SectorBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\SubEntity\SuicideBomb.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\ThinTimeBullet.cs" />
@@ -239,9 +241,11 @@
     <Compile Include="Assets\_Scripts\Bullet\Generator\FastThinGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\Generator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\LineGenerator.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Generator\MeteorGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\OneRotateGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\OrbitGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\RectangleGenerator.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Generator\RemainGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\SectorGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\ThinTimeGenerator.cs" />
     <Compile Include="Assets\_Scripts\CollTag.cs" />
@@ -255,6 +259,7 @@
     <Compile Include="Assets\_Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Manager\ResultManager.cs" />
     <Compile Include="Assets\_Scripts\Manager\ScoreManager.cs" />
+    <Compile Include="Assets\_Scripts\MeteorAnimation.cs" />
     <Compile Include="Assets\_Scripts\MeteorTest.cs" />
     <Compile Include="Assets\_Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\_Scripts\ParticleAutoDelete.cs" />

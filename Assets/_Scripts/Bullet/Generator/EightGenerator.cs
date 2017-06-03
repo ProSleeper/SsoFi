@@ -10,7 +10,7 @@ public class EightGenerator : OneRotateGenerator
 		Bullet = Resources.Load("Prefabs/Bullet/Entity/OneBulletRotate") as GameObject;
 	}
 
-	public override void FireMissile()
+	public override void FireBullet()
 	{
 		for (int i = 0; i < 8; i++)
 		{
