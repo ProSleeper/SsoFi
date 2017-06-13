@@ -34,8 +34,13 @@ public class PlayerBulletCreator : BulletCreater
 		BulletEntity[(int)BULLET_TYPE.BT_FASTTHIN].GetComponent<FastThinGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 0.5f), 40, 0.1f);
         BulletEntity[(int)BULLET_TYPE.BT_REMAIN].GetComponent<RemainGenerator>().BulletSetting(new Vector3(0.4f, 0.4f, 0.5f), 0, 0.035f);
 		BulletEntity[(int)BULLET_TYPE.BT_METEOR].GetComponent<MeteorGenerator>().BulletSetting(new Vector3(2f, 2f, 2f), 0, 3f);
+        BulletEntity[(int)BULLET_TYPE.BT_TRIPLECIRCLE].GetComponent<TripleCircleGenerator>().BulletSetting(new Vector3(0.5f, 0.5f, 0.5f), 10, 1f);
+        BulletEntity[(int)BULLET_TYPE.BT_DART].GetComponent<DartGenerator>().BulletSetting(new Vector3(1f, 1f, 1), 20, 1f);
+        BulletEntity[(int)BULLET_TYPE.BT_TWOPHASE].GetComponent<TwoPhaseGenerator>().BulletSetting(new Vector3(0.75f, 0.75f, 1), 20, 5f);
+        
 
-		BulletGeneratorChange(BULLET_TYPE.BT_METEOR);
+
+        BulletGeneratorChange(BULLET_TYPE.BT_TWOPHASE);
 	}
 
 

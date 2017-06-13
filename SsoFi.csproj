@@ -75,7 +75,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Data\Images\Rote.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -222,6 +221,7 @@
     <Compile Include="Assets\_Scripts\Bullet\Creator\PlayerGun.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\BigBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\ChaseBullet.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Entity\DartBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\DefaultBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\EightDirBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\FastThinBullet.cs" />
@@ -233,11 +233,17 @@
     <Compile Include="Assets\_Scripts\Bullet\Entity\RemainBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\SectorBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\SubEntity\SuicideBomb.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Entity\SubEntity\TripleInnerCircle.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Entity\ThinTimeBullet.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Entity\TripleCircleBullet.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Entity\TwoPhaseBullet.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\BigGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\BulletGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\ChaserGenerator.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Generator\DartGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\EightGenerator.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Generator\Enemy\BossEnemy.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Generator\Enemy\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\FastThinGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\Generator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\LineGenerator.cs" />
@@ -248,10 +254,10 @@
     <Compile Include="Assets\_Scripts\Bullet\Generator\RemainGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\SectorGenerator.cs" />
     <Compile Include="Assets\_Scripts\Bullet\Generator\ThinTimeGenerator.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Generator\TripleCircleGenerator.cs" />
+    <Compile Include="Assets\_Scripts\Bullet\Generator\TwoPhaseGenerator.cs" />
     <Compile Include="Assets\_Scripts\CollTag.cs" />
     <Compile Include="Assets\_Scripts\ConstStageValue.cs" />
-    <Compile Include="Assets\_Scripts\Enemy\BossEnemy.cs" />
-    <Compile Include="Assets\_Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\_Scripts\FPSCheck.cs" />
     <Compile Include="Assets\_Scripts\Item.cs" />
     <Compile Include="Assets\_Scripts\LoadData.cs" />
@@ -264,7 +270,9 @@
     <Compile Include="Assets\_Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\_Scripts\ParticleAutoDelete.cs" />
     <Compile Include="Assets\_Scripts\Player.cs" />
+    <Compile Include="Assets\_Scripts\Rote.cs" />
     <Compile Include="Assets\_Scripts\TagInit.cs" />
+    <Compile Include="Assets\_Scripts\TripleRote.cs" />
     <Compile Include="Assets\_Scripts\UI\StartButton.cs" />
     <Compile Include="Assets\_Scripts\UI\Volume.cs" />
     <Compile Include="Assets\_Scripts\WallMethod.cs" />
