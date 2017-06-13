@@ -8,8 +8,7 @@ public enum BULLET_TYPE
 	BT_BIG,
 	BT_BULLET,
 	BT_CHASE,
-    BT_DART,
-    BT_EIGHTDIR,
+	BT_EIGHTDIR,
 	BT_FASTTHIN,
 	BT_LINE,
 	BT_METEOR,
@@ -19,9 +18,7 @@ public enum BULLET_TYPE
     BT_REMAIN,
 	BT_SECTOR,
 	BT_THINTIME,
-    BT_TRIPLECIRCLE,
-    BT_TWOPHASE,
-    BT_MAX
+	BT_MAX
 }
 
 //베이스는 보스 세팅으로 되어 있음
@@ -82,11 +79,8 @@ public class BulletCreater : MonoBehaviour
 		BulletEntity[(int)BULLET_TYPE.BT_FASTTHIN].GetComponent<FastThinGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 1f), 45, 0.01f);
         BulletEntity[(int)BULLET_TYPE.BT_REMAIN].GetComponent<RemainGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 0.5f), 40, 0.1f);
 		BulletEntity[(int)BULLET_TYPE.BT_METEOR].GetComponent<MeteorGenerator>().BulletSetting(new Vector3(1f, 1f, 1f), 0, 3f);
-        BulletEntity[(int)BULLET_TYPE.BT_TRIPLECIRCLE].GetComponent<TripleCircleGenerator>().BulletSetting(new Vector3(1f, 1f, 1), 20, 1f);
-        BulletEntity[(int)BULLET_TYPE.BT_DART].GetComponent<DartGenerator>().BulletSetting(new Vector3(1f, 1f, 1), 20, 1f);
-        BulletEntity[(int)BULLET_TYPE.BT_TWOPHASE].GetComponent<TwoPhaseGenerator>().BulletSetting(new Vector3(1f, 1f, 1), 20, 1f);
-        
 
-        BulletGeneratorChange(BULLET_TYPE.BT_FASTTHIN);
+
+		BulletGeneratorChange(BULLET_TYPE.BT_FASTTHIN);
 	}
 }

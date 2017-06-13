@@ -8,7 +8,7 @@ public class TagInit : MonoBehaviour
 {
 	void Start ()
 	{
-		this.gameObject.tag = RecursiveOwnTag(this.gameObject);
+		this.gameObject.tag = RecursiveTag(this.gameObject);
 	}
 
 	//재귀함수로 최상위 오브젝트의 태그로 하위 모든 태그를 변경
@@ -26,18 +26,4 @@ public class TagInit : MonoBehaviour
 		}
 		return tag;
 	}
-
-    string RecursiveOwnTag(GameObject own)
-    {
-        string tag = string.Empty;
-        if (own.transform.parent != null)
-        {
-            tag = RecursiveOwnTag(own.transform.parent.gameObject);
-        }
-        else
-        {
-            tag = own.gameObject.tag;
-        }
-        return tag;
-    }
 }

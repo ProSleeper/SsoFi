@@ -50,6 +50,7 @@ public class ScoreManager : MonoBehaviour
 		{
 			ScoreText.text = "Score: 0";
 		}
+		Debug.Log("스코어매니저 스타트");
 
 	}
 

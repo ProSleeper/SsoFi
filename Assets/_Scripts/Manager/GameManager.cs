@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 		_instance = this;
 		CollTag.SetColl();
 		LoadData.OnEnemyDataLoad();
+		Debug.Log(Time.time);
 	}
 
 	void Start()

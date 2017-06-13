@@ -47,6 +47,7 @@ public class ResultManager : MonoBehaviour
 		BestTime = Best.transform.FindChild("Time").GetComponent<UILabel>();
 		CurrScore = Current.transform.FindChild("Score").GetComponent<UILabel>();
 		CurrTime = Current.transform.FindChild("Time").GetComponent<UILabel>();
+		Debug.Log("리절트 매니저 어웨이크");
 	}
 
 	void Start ()

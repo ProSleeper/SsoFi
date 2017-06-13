@@ -17,7 +17,7 @@ public class SectorGenerator : OneRotateGenerator
 		{
 			temp = Vector3.up;
 		}
-		for (int i = -2; i < 3; i++)
+		for (int i = -1; i < 2; i++)
 		{
 			GameObject spawn_bullet = Instantiate(Bullet, this.gameObject.transform.position, Quaternion.identity) as GameObject;
 			spawn_bullet.transform.localScale = BulletSize;
