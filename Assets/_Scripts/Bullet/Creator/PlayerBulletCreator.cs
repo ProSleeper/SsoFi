@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerBulletCreator : BulletCreater
 {
+    float dTime;
+    int test = 10;
+
 	public override string TagSetting()
 	{
 		return TAG_NAME.PlayerBullet.ToString();
@@ -34,19 +37,24 @@ public class PlayerBulletCreator : BulletCreater
 		BulletEntity[(int)BULLET_TYPE.BT_FASTTHIN].GetComponent<FastThinGenerator>().BulletSetting(new Vector3(0.3f, 0.3f, 0.5f), 40, 0.1f);
         BulletEntity[(int)BULLET_TYPE.BT_REMAIN].GetComponent<RemainGenerator>().BulletSetting(new Vector3(0.4f, 0.4f, 0.5f), 0, 0.035f);
 		BulletEntity[(int)BULLET_TYPE.BT_METEOR].GetComponent<MeteorGenerator>().BulletSetting(new Vector3(2f, 2f, 2f), 0, 3f);
+        BulletEntity[(int)BULLET_TYPE.BT_TRIPLECIRCLE].GetComponent<TripleCircleGenerator>().BulletSetting(new Vector3(0.5f, 0.5f, 0.5f), 10, 1f);
+        BulletEntity[(int)BULLET_TYPE.BT_DART].GetComponent<DartGenerator>().BulletSetting(new Vector3(1f, 1f, 1), 20, 1f);
+        BulletEntity[(int)BULLET_TYPE.BT_TWOPHASE].GetComponent<TwoPhaseGenerator>().BulletSetting(new Vector3(0.75f, 0.75f, 1), 20, 5f);
+        BulletEntity[(int)BULLET_TYPE.BT_SHRINKSQUARE].GetComponent<ShrinkSquareGenerator>().BulletSetting(new Vector3(3f, 3f, 1), 20, 4f);
+        BulletEntity[(int)BULLET_TYPE.BT_GROWPLAYER].GetComponent<GrowPlayerGenerator>().BulletSetting(new Vector3(1f, 1f, 1), 20, 4f);
 
-		BulletGeneratorChange(BULLET_TYPE.BT_METEOR);
+        BulletGeneratorChange(BULLET_TYPE.BT_GROWPLAYER);
 	}
 
 
 
-	//private void Update()
-	//{
-	//	dtime += Time.deltaTime;
-	//	if (dtime > 3f)
-	//	{
-	//		BulletGeneratorChange((BULLET_TYPE)(Random.Range(0, (int)BULLET_TYPE.BT_MAX)));
-	//		dtime = 0;
-	//	}
-	//}
+    //private void Update()
+    //{
+    //    dTime += Time.deltaTime;
+    //    if (dTime > 7f)
+    //    {
+    //        BulletGeneratorChange((BULLET_TYPE)(++test));
+    //        dTime = 0;
+    //    }
+    //}
 }
